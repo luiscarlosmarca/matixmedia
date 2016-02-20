@@ -62,4 +62,19 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    //Solucionar el error 404 por que cambiamos la ruta por defecto que viene auth/login, para que se personalizada 
+    //debemos hacer unos cambios, en las siguientes lineas
+
+    public function loginPath()
+    {
+        return route('login');
+    }
+
+    public function redirectPath()
+    {
+      return route('home');  
+    }
+
+
 }
