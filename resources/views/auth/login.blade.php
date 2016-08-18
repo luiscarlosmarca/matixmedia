@@ -1,69 +1,77 @@
-<!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="UTF-8">
-    <title>Matixtiando 1.0</title>
-    <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+@extends('auth.auth')
 
+@section('htmlheader_title')
+  Iniciar sesión
+@endsection
 
-    
-    <link rel="stylesheet" href="css/normalize.css">
+@section('content')
+<body class="login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="{{ url('/home') }}"><b>Inicio de </b> sesión</a>
+        </div><!-- /.login-logo -->
 
-    
-        <link rel="stylesheet" href="css/login.css">
-
-    
-    
-    <style> 
-            @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700|Handlee);
-            body {
-                background: url(/images/bg.jpg) no-repeat center top;
-                -webkit-background-size: cover;
-                -moz-background-size: cover;
-                background-size: cover;
-            }
-            
-    </style>
-  </head>
-
-  <body>
-
-    <div class="login">
-  <header class="header">
-    <span class="text">LOGIN</span>
-    <span class="loader"></span>
-
-          @if (count($errors) > 0)
-            <div class="alert alert-danger">
-              Por favor corrige los siguientes errores:<br><br>
-              <ul>
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
                 @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
-              </ul>
-            </div>
-          @endif
+            </ul>
+        </div>
+    @endif
 
-  </header>
-  <form class="form-horizontal" role="form" method="POST" action="{{route('login') }}">
+    <div class="login-box-body">
+    <p class="login-box-msg">Ingrese sus datos para iniciar sesión.</p>
+    <form action="{{ url('/auth/login') }}" method="post">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="form-group has-feedback">
+            <input type="email" class="form-control" placeholder="Email" name="email"/>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <input type="password" class="form-control" placeholder="Password" name="password"/>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="checkbox icheck">
+                    <label>
+                        <input type="checkbox" name="remember"> Recordarme
+                    </label>
+                </div>
+            </div><!-- /.col -->
+            <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+            </div><!-- /.col -->
+        </div>
+    </form>
 
-   <input type="text" name="email" class="input" placeholder="Digite su email">
-    <input type="password" name="password" class="input" placeholder="ingrese la contraseeña">
-    
-    <button class="btn" type="submit"></button>
-  </form>
+    <div class="social-auth-links text-center">
+        <p>- ó -</p>
+        <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
+        <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
+    </div><!-- /.social-auth-links -->
 
-</div>
+    <a href="{{ url('/password/email') }}">Olvide mi contraseña</a><br>
+    <a href="{{ url('/auth/register') }}" class="text-center">Crear una cuenta</a>
 
+</div><!-- /.login-box-body -->
 
-<button class ="resetbtn" type= "reset">Reset it
-</button>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+</div><!-- /.login-box -->
 
-        <script src="js/index.js"></script>
+    @include('auth.scripts')
 
-    
-    
-    
-  </body>
-</html>
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+</body>
+
+@endsection

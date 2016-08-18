@@ -17,28 +17,39 @@ class CreateProjectsTable extends Migration
             $table->string('name',30);
             $table->text('details');
             $table->double('price');
-            $table->string('service');
-            $table->text('feactures');
-            $table->string('formPay');
-            $table->text('note');
+            $table->string('phase');//fase del proyecto en la vista select box
+            $table->string('formPay');//select en la vista
+            $table->string('contract');//adjuntar el pdf del contrato firmado
             $table->string('file')->nullable();//archivo rar de info inicial del proyecto
             $table->date('dateStart');
             $table->date('dateFinish');
-            $table->integer('idCreater')->unsigned();
-            $table->integer('idEditer')->unsigned();
+      
+            //relaciones
+            $table->integer('service_id')->unsigned();
+            $table->foreign('service_id')
+              ->references('id')->on('services')
+              ->onUpdate('cascade');
+
+            $table->integer('developer_id')->unsigned();
+            $table->foreign('developer_id')
+              ->references('id')->on('users')
+              ->onUpdate('cascade');
+
             $table->integer('costumer_id')->unsigned();
-            $table->timestamps();
-
-
             $table->foreign('costumer_id')
-                ->references('id')->on('customers');
+                ->references('id')->on('users')
+                ->onUpdate('cascade');
 
-             $table->foreign('idCreater')
-                ->references('id')->on('users');
 
-             $table->foreign('idEditer')
-                ->references('id')->on('users');
-                
+            ///*****
+            $table->timestamps();
+                //****Campos de predeterminados ***///
+            $table->text('note');
+            $table->integer('iduser_create');//usuario que crea el registro
+            $table->integer('iduser_update');//usuario que actualiza el registro.
+                ////**********************
+
+
         });
     }
 
