@@ -124,4 +124,15 @@ class User extends Model implements AuthenticatableContract,
 
     }
 
+
+    public static function filter($name,$role,$cedula)
+    {
+        return User::name($name)
+          ->role($role)
+          ->cedula($cedula)
+          ->orderBy('created_at','DESC')
+          ->paginate(15);
+    }
+
+
 }

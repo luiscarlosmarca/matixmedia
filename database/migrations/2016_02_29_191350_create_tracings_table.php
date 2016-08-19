@@ -17,7 +17,7 @@ class CreateTracingsTable extends Migration
             $table->string('file',40)->nullable();
             $table->date('date');
             $table->text('details');
-            $table->string('state');//abierto en producion o cerrado
+            $table->string('state');//abierto en producion o cerrado estado
             $table->string('phase');//fase del proyecto select
 
 

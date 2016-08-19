@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 class Project extends Model
 {
     protected $table = 'projects';
-    protected $fillable = ['details','name','price','service_id','developer_id','costumer_id','iduser_create','iduser_update','note','formPay','contract','file','dateStart','dateFinish',];
+    protected $fillable = ['details','name','price','service_id','developer_id','costumer_id','iduser_create','iduser_update','note','formPay','contract','file','dateStart','dateFinish'];
 
 //****relaciones
 // Duda, como saber cual campo conecta con cual rol, pues es la misma tabla.??
@@ -45,8 +45,8 @@ class Project extends Model
 
   public function briefs()
   {
-    //Un proyecto puede un solo requerimiento
-    return $this->belongTo('App\Brief');
+    //Un proyecto puede tener un solo requerimiento o brief como la hoja de vida del proyecto
+    return $this->hasOne('App\Brief');
   }
 
   public function payments()
@@ -67,7 +67,14 @@ class Project extends Model
 
   }
 
-  
+  public static function filtro($name)
+  {
+      return Project::name($name)
+        ->orderBy('created_at','DESC')
+        ->paginate(10);
+  }
+
+
 
 
 }
