@@ -21,12 +21,11 @@ class CreateUsersTable extends Migration
             $table->string('photo');
             $table->string('address');
             $table->integer('cellphone');
-            $table->integer('phone');
-            $table->cedula('string')->unique();
+            $table->string('cedula')->unique();
 
             //****Campos de predeterminados ***///
             $table->text('note');
-            $table->integer('iduser_create');//usuario que crea el registro 
+            $table->integer('iduser_create');//usuario que crea el registro
             $table->integer('iduser_update');//usuario que actualiza el registro.
             ////**********************
 

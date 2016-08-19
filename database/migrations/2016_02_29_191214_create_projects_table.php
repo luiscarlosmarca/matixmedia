@@ -17,13 +17,13 @@ class CreateProjectsTable extends Migration
             $table->string('name',30);
             $table->text('details');
             $table->double('price');
-            $table->string('phase');//fase del proyecto en la vista select box
+
             $table->string('formPay');//select en la vista
             $table->string('contract');//adjuntar el pdf del contrato firmado
             $table->string('file')->nullable();//archivo rar de info inicial del proyecto
             $table->date('dateStart');
             $table->date('dateFinish');
-      
+
             //relaciones
             $table->integer('service_id')->unsigned();
             $table->foreign('service_id')
@@ -46,7 +46,14 @@ class CreateProjectsTable extends Migration
                 //****Campos de predeterminados ***///
             $table->text('note');
             $table->integer('iduser_create');//usuario que crea el registro
+            $table->foreign('iduser_create')// el agente de venta
+                ->references('id')->on('users')
+                ->onUpdate('cascade');
+
             $table->integer('iduser_update');//usuario que actualiza el registro.
+            $table->foreign('iduser_update')
+                ->references('id')->on('users')
+                ->onUpdate('cascade');
                 ////**********************
 
 

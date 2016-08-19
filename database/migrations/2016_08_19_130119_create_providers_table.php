@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExpensesTable extends Migration
+class CreateProvidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,13 @@ class CreateExpensesTable extends Migration
      */
     public function up()
     {
-        Schema::create('expenses', function (Blueprint $table) {
+        Schema::create('providers', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('date');
-            $table->text('details');
-            $table->double('value');
-
-            //relaciones
-            $table->string('provider_id');//select proveedores
-            $table->foreign('provider_id')
-              ->references('id')->on('providers')
-              ->onUpdate('cascade');
-
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('contact');//conctacto de la entidad
+            $table->string('category');// select view category
             $table->timestamps();
 
             //****Campos de predeterminados ***///
@@ -48,6 +43,6 @@ class CreateExpensesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('expenses');
+        Schema::drop('providers');
     }
 }

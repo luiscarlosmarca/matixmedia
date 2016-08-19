@@ -15,22 +15,38 @@ class CreateTracingsTable extends Migration
         Schema::create('tracings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('file',40)->nullable();
+            $table->date('date');
             $table->text('details');
             $table->string('state');//abierto en producion o cerrado
-            $table->string('phase');//fase del proyecto
-            $table->double('pay')->nullable();//para ingresar algun pago asociado
-            $table->text('notes')->nullable();
+            $table->string('phase');//fase del proyecto select
 
+
+            //relaciones
             $table->integer('project_id')->unsigned();
-            $table->integer('idCreater')->unsigned();
+            $table->foreign('project_id')
+                  ->references('id')->on('projects')
+                  ->onUpdate('cascade');
+
+
+            $table->integer('pay_id')->unsigned();//para ingresar algun pago asociado opcoines
+            $table->foreign('pay_id')
+                    ->references('id')->on('payments')
+                    ->onUpdate('cascade');
 
             $table->timestamps();
 
-             $table->foreign('project_id')
-                  ->references('id')->on('projects');
+                  //****Campos de predeterminados ***///
+            $table->text('note');
+            $table->integer('iduser_create');//usuario que crea el registro
+            $table->foreign('iduser_create')// el agente de venta
+                  ->references('id')->on('users')
+                  ->onUpdate('cascade');
 
-            $table->foreign('idCreater')
-                  ->references('id')->on('users');
+            $table->integer('iduser_update');//usuario que actualiza el registro.
+            $table->foreign('iduser_update')
+                  ->references('id')->on('users')
+                  ->onUpdate('cascade');
+                  ////**********************
         });
     }
 

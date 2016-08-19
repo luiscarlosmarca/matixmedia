@@ -14,20 +14,28 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('date');
             $table->double('value');
             $table->string('type');
-            $table->text('note');
 
+//** relaciones
             $table->integer('project_id')->unsigned();
-            $table->integer('idCreater')->unsigned();
-
-            $table->timestamps();
-
             $table->foreign('project_id')
                   ->references('id')->on('projects');
+            $table->timestamps();
 
-            $table->foreign('idCreater')
-                  ->references('id')->on('users');
+            //****Campos de predeterminados ***///
+            $table->text('note');
+            $table->integer('iduser_create');//usuario que crea el registro
+            $table->foreign('iduser_create')// el agente de venta
+              ->references('id')->on('users')
+              ->onUpdate('cascade');
+
+            $table->integer('iduser_update');//usuario que actualiza el registro.
+            $table->foreign('iduser_update')
+            ->references('id')->on('users')
+            ->onUpdate('cascade');
+            ////**********************
 
         });
     }
