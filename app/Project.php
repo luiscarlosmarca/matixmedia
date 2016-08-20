@@ -67,7 +67,7 @@ class Project extends Model
 
   }
 
-  public static function filtro($name)
+  public static function filter($name)
   {
       return Project::name($name)
         ->orderBy('created_at','DESC')

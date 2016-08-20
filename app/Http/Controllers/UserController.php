@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Profile;
+use \Input as Input;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\EditUserRequest;
 use Illuminate\Support\Facades\Session;
@@ -79,11 +80,11 @@ class UserController extends Controller
       {
               $user=User::findOrFail($id);
               //$users->iduser_update->$id;
-              $hotel->fill($request->all());
-              $hotel->save();
+              $users->fill($request->all());
+              $users->save();
 
-              Session::flash('message',$hotel->name.' Se actualizo');
-              return redirect()->route('hoteles');
+              Session::flash('message',$users->name.' Se actualizo');
+              return redirect()->route('users');
 
       }
 
