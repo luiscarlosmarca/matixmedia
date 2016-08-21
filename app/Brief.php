@@ -17,9 +17,13 @@ class Brief extends Model
    //Cada brief pertenece o hace parte de un proyecto
    return $this->belongTo('App\Project');
   }
-
+  public function user()
+  {
+   //un usuario crea este registro
+   return $this->belongTo('App\User');
+  }
   //*** metodos
 
 
-  
+
 }

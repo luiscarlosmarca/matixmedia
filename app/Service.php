@@ -35,7 +35,7 @@ class Service extends Model
   public static function filter($name)
   {
       return Service::name($name)
-        ->orderBy('created_at','DESC')
+        ->orderBy('name','ASC')
         ->paginate(10);
   }
 

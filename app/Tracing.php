@@ -12,12 +12,11 @@ class Tracing extends Model
   protected $fillable = ['details','date','phase','project_id','state','file','iduser_create','iduser_update','note'];
 
 //* relaciones
-
-public function project()
-{
+  public function project()
+  {
  //Cada seguimiento pertence a un projecto
- return $this->belongTo('App\Project');
-}
+    return $this->belongTo('App\Project');
+  }
   public function user()
   {
    //un usuario crea este registro

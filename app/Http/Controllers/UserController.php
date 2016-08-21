@@ -88,7 +88,7 @@ class UserController extends Controller
 
       }
 
-    public function pdf($id)
+    public function pdf(Request $request,$id)
     {
       /// falta insertar el componente pdf
        $user=User::findOrFail($id);

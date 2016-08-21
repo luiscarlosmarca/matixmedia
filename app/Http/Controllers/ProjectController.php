@@ -36,6 +36,14 @@ class ProjectController extends Controller
       return view('projects/list', compact('projects'));
     }
 
+    public function pdf($id)
+    {
+      /// falta insertar el componente pdf
+       $project=Project::findOrFail($id);
+       $pdf = PDF::loadView('projects.pdf',compact('project'));
+       return $pdf->stream();
+    }
+
     public function my_projects()//los projectos de cada usuario
     {//en la vista hacer un condicional para mostrar cierta informacion.
       $id=Auth::user()->id;
@@ -53,6 +61,7 @@ class ProjectController extends Controller
          $projects=Project::->where('agent_id', '$id');
 
        }
+       // Como hacer la relacion si, la tabla proect se relaciona varias veces con la misma tabla user.
 
        return view('projects/miProject', compact('projects'));
 
@@ -228,7 +237,7 @@ class ProjectController extends Controller
         $payments->fill($request->all());
         $payments->save();
 
-        Session::flash('message',$payments->name.' Se actualizo exitosamente');
+        Session::flash('message',$payments->project->name. ' Se actualizo exitosamente el Ingreso');
         return redirect()->back();
       }
       /**

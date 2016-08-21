@@ -31,7 +31,7 @@ class Provider extends Model
 
   }
 
-  public function scopeName($query,$contact)// Buscar por el nombre
+  public function scopeContact($query,$contact)// Buscar por el nombre
   {
 
     if (trim($contact) != "")
@@ -42,7 +42,7 @@ class Provider extends Model
 
   }
 
-  public function scopeName($query,$category)// Buscar por el nombre
+  public function scopeCategory($query,$category)// Buscar por el nombre
   {
 
     if (trim($category) != "")
