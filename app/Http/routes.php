@@ -15,9 +15,6 @@ Route::get('/',[
   'as'		=>	'login'
   ]);
 
-
-
-
 // Password reset link request routes...
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
@@ -33,10 +30,35 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
  ]);
 
-
 Route::post('login','Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...
 Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', 'Auth\AuthController@postRegister');
+
+/**
+//Rutas para el modulo administrativo primer filtro. login
+ */
+
+Route::group(['middleware'=>'auth'], function(){
+
+      /**
+      //Segundo filtro. role-> admin
+       */
+    Route::group(['prefix'=>'admin','middleware'=>'role:admin'], function()
+    {
+      Route::resource('usuarios','UserController');
+      Route::resource('projectos','ProjectController');
+      Route::resource('seguimientos','TracingController');
+      Route::resource('briefs','BriefController');
+      Route::resource('ingresos','PaymentController');
+      Route::resource('salidas','ExpenseController');
+      Route::resource('proveedores','ProviderController');
+      Route::resource('servicios','ServiceController');
+
+    });
+
+
+
+});

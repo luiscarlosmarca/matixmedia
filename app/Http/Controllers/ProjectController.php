@@ -308,7 +308,7 @@ class ProjectController extends Controller
           {
             $proyect=Project::findOrFail($id);
 
-            return view('projects/brief/create',compact('project'));
+            return view('projects/briefs/create',compact('project'));
           }
 
        public function store_brief(CreateBriefRequest $request)
@@ -318,7 +318,7 @@ class ProjectController extends Controller
             {
                 $file = $request->file('file');
                 $name = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
-                $path = public_path().'/upload/projects/brief/';
+                $path = public_path().'/upload/projects/briefs/';
                 $file->move($path,$name);
             }
             $briefs = new Brief($request->all());
@@ -349,7 +349,7 @@ class ProjectController extends Controller
               {
                   $file = $request->file('file');
                   $name = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
-                  $path = public_path().'/upload/projects/brief/';
+                  $path = public_path().'/upload/projects/briefs/';
                   $file->move($path,$name);
 
                   Storage::delete($path . $file_old);
