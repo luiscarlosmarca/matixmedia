@@ -137,8 +137,10 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        
+
         Acacha\AdminLTETemplateLaravel\app\Providers\AdminLTETemplateServiceProvider::class,
+
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Form colletive dinamico...
@@ -201,6 +203,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'PDF'       => Barryvdh\DomPDF\Facade::class,
 
 
   /*

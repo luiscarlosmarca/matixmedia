@@ -28,7 +28,7 @@ class CreateProfilesTable extends Migration
             $table->date('feNa');
 
             //relaciones con la tabla usuario
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id',10)->unsigned();
             $table->foreign('user_id')->references('id')
             ->on('users')
 

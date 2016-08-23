@@ -14,6 +14,9 @@ use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\CreateProfileRequest;
 use App\Http\Requests\EditProfileRequest;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade as PDF;
+
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -80,6 +83,7 @@ class UserController extends Controller
     public function update(EditUserRequest $request,$id)
 
       {
+        dd($id);
               $user=User::findOrFail($id);
               //$users->iduser_update->$id;
               $users->fill($request->all());
@@ -90,12 +94,14 @@ class UserController extends Controller
 
       }
 
-    public function pdf(Request $request,$id)
+    public function pdf()
     {
-      /// falta insertar el componente pdf
-       $user=User::findOrFail($id);
-       $pdf = PDF::loadView('users.pdf',compact('user'));
-       return $pdf->stream();
+        /// falta insertar el componente pdf
+      //  $id=Auth::user()->id;
+
+        $users=User::orderBy('name', 'desc')->get();
+        $pdf = PDF::loadView('users/pdf',compact('users'));
+        return $pdf->stream();
     }
       //******  perfil**********************************###################
       //###########################################################

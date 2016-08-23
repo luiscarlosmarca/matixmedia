@@ -22,7 +22,9 @@ use App\Http\Requests\EditTracingRequest;
 use App\Http\Requests\CreateBriefRequest;
 use App\Http\Requests\EditBriefRequest;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade as PDF;
 
+use Illuminate\Support\Facades\Auth;
 class ProjectController extends Controller
 {
     /**
@@ -36,11 +38,20 @@ class ProjectController extends Controller
       return view('projects/list', compact('projects'));
     }
 
-    public function pdf($id)
+    public function mi_pdf($id)
     {
-      /// falta insertar el componente pdf
+      /// Para generar pdf de cada projecto, por separado.
        $project=Project::findOrFail($id);
        $pdf = PDF::loadView('projects.pdf',compact('project'));
+       return $pdf->stream();
+    }
+
+    public function pdf()
+    {
+      /// listado en pdf, de los projectos mas recientes con los datos mas importantes.
+       $projects=Project::orderBy('name', 'desc')->get();
+       $pdf = PDF::loadView('projects.pdf',compact('projects'));
+       //ciclo para recorrer el array
        return $pdf->stream();
     }
 
@@ -50,15 +61,15 @@ class ProjectController extends Controller
       $role=Auth::user()->role;
       if ($role=='developer')
       {
-        $projects=Project::->where('developer_id', '$id');
+        $projects=Project::where('developer_id', '$id');
 
       }elseif ($role=='agent')
        {
-         $projects=Project::->where('iduser_create', '$id');
+         $projects=Project::where('iduser_create', '$id');
 
        }elseif ($role=='customer')
        {
-         $projects=Project::->where('agent_id', '$id');
+         $projects=Project::where('agent_id', '$id');
 
        }
        // Como hacer la relacion si, la tabla proect se relaciona varias veces con la misma tabla user.

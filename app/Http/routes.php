@@ -49,7 +49,28 @@ Route::group(['middleware'=>'auth'], function(){
     Route::group(['prefix'=>'admin','middleware'=>'role:admin'], function()
     {
       Route::resource('usuarios','UserController');
+
+        Route::get('/admin/usuarios/pdf/',[
+        'uses'	=>'UserController@pdf',
+        'as'	=>'admin.usuarios.pdf'
+        ]);
+        Route::get('/admin/usuarios/perfil/',[
+        'uses'	=>'UserController@create_profile',
+        'as'	=>'admin.usuarios.perfil'
+        ]);
+
       Route::resource('projectos','ProjectController');
+
+        Route::get('/admin/projectos/pdf/',[//listado de los proyectos mas recientes
+        'uses'	=>'ProjectController@pdf',
+        'as'	=>'admin.projectos.pdf'
+        ]);
+        Route::get('/admin/projecto/pdf/{id}',[//listado de los proyectos mas recientes
+        'uses'	=>'ProjectController@mi_pdf',
+        'as'	=>'admin.projecto.pdf'
+        ]);
+
+
       Route::resource('seguimientos','TracingController');
       Route::resource('briefs','BriefController');
       Route::resource('ingresos','PaymentController');
@@ -57,7 +78,11 @@ Route::group(['middleware'=>'auth'], function(){
       Route::resource('proveedores','ProviderController');
       Route::resource('servicios','ServiceController');
 
+
+
+
     });
+
 
 
 
