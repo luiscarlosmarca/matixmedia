@@ -11,7 +11,9 @@ use App\Provider;
 use App\Http\Requests\CreateProviderRequest;
 use App\Http\Requests\EditProviderRequest;
 use App\Http\Requests\CreateExpenseRequest;
+use Barryvdh\DomPDF\Facade as PDF;
 
+use Illuminate\Support\Facades\Auth;
 class ProviderController extends Controller
 {
     /**

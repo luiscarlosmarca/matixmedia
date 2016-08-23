@@ -10,6 +10,9 @@ use App\Expense;
 use App\Payment;
 use App\Http\Requests\EditExpenseRequest;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade as PDF;
+
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {

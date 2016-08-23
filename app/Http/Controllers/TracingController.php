@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tracing;
+use Barryvdh\DomPDF\Facade as PDF;
+
+use Illuminate\Support\Facades\Auth;
 class TracingController extends Controller
 {
     /**
@@ -16,16 +19,20 @@ class TracingController extends Controller
      */
     public function index(Request $request)
     { //view for admin, only read: agent and developer,
-      $tracings= Tracing::filter($request->get('date'),$request->get('state'));
+     $tracings= Tracing::filter($request->get('date'),$request->get('state'));
+
       return view('tracings/list', compact('tracings'));
     }
 
-    public function pdf(Request $request)
+    public function pdf()
     {
       /// only admin
-       $tracings=Tracing::filter($request->get('date'),($request->get('state')));
-       $pdf = PDF::loadView('tracings.pdf',compact('$tracings'));
-       return $pdf->stream();
+      // faltaria para usar de otra forma (Request $request)
+      // $tracings=Tracing::filter($request->get('date'),($request->get('state')));
+       // para usuar luego con campos de textdomain
+      $tracings=Tracing::orderBy('date', 'desc')->get();
+      $pdf = PDF::loadView('tracings.pdf',compact('$tracings'));
+      return $pdf->stream();
     }
 
 

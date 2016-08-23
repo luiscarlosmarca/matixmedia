@@ -33,9 +33,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 Route::post('login','Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
 
-// Registration routes...
-Route::get('register', 'Auth\AuthController@getRegister');
-Route::post('register', 'Auth\AuthController@postRegister');
+
 
 /**
 //Rutas para el modulo administrativo primer filtro. login
@@ -48,6 +46,11 @@ Route::group(['middleware'=>'auth'], function(){
        */
     Route::group(['prefix'=>'admin','middleware'=>'role:admin'], function()
     {
+      // Registration routes...
+      Route::get('register', 'Auth\AuthController@getRegister');
+      Route::post('register', 'Auth\AuthController@postRegister');
+
+
       Route::resource('usuarios','UserController');
 
         Route::get('/admin/usuarios/pdf/',[
@@ -70,13 +73,98 @@ Route::group(['middleware'=>'auth'], function(){
         'as'	=>'admin.projecto.pdf'
         ]);
 
+        Route::get('/admin/projecto/registrar_ingreso/{id}',[
+        'uses'	=>'ProjectController@create_payment',
+        'as'	  =>'admin.projecto.add_ingresos'
+        ]);
+
+        Route::post('/admin/projecto/registrar_ingreso/',[
+          'uses'=>'ProjectController@store_payment',
+          'as'  =>'admin.projecto.store_ingresos'
+        ]);
+
+        Route::get('/admin/projecto/editar_ingreso/{id}',[
+        'uses'	=>'ProjectController@edit_payment',
+        'as'  	=>'admin.projecto.edit_ingresos'
+        ]);
+
+        Route::patch('/admin/projecto/editar_ingreso/{id}',[
+        'uses'	=>'ProjectController@update_payment',
+        'as'	=>'admin.projecto.update_ingresos'
+        ]);
+
+        Route::get('/admin/projecto/registrar_seguimiento/{id}',[
+        'uses'	=>'ProjectController@create_tracing',
+        'as'	  =>'admin.projecto.add_tracing'
+        ]);
+
+        Route::post('/admin/projecto/registrar_seguimiento/',[
+          'uses'=>'ProjectController@store_tracing',
+          'as'  =>'admin.projecto.store_tracing'
+        ]);
+
+        Route::get('/admin/projecto/editar_seguimiento/{id}',[
+        'uses'	=>'ProjectController@edit_tracing',
+        'as'	  =>'admin.projecto.edit_tracing'
+        ]);
+
+        Route::patch('/admin/projecto/editar_seguimiento/{id}',[
+        'uses'	=>'ProjectController@update_tracing',
+        'as'	=>'admin.projecto.update_tracing'
+        ]);
+
+        Route::get('/admin/projecto/registrar_brief/{id}',[
+        'uses'	=>'ProjectController@create_brief',
+        'as'  	=>'admin.projecto.add_brief'
+        ]);
+
+        Route::post('/admin/projecto/registrar_brief/',[
+          'uses'=>'ProjectController@store_brief',
+          'as'  =>'admin.projecto.store_brief'
+        ]);
+
+        Route::get('/admin/projecto/editar_brief/{id}',[
+        'uses'	=>'ProjectController@edit_brief',
+        'as'	  =>'admin.projecto.editar_brief'
+        ]);
+
+        Route::patch('/admin/projecto/editar_brief/{id}',[
+        'uses'	=>'ProjectController@update_brief',
+        'as'	=>'admin.projecto.update_brief'
+        ]);
 
       Route::resource('seguimientos','TracingController');
+        Route::get('/admin/seguimientos/pdf/',[
+        'uses'	=>'TracingController@pdf',
+        'as'	=>'admin.seguimientos.pdf'
+        ]);
       Route::resource('briefs','BriefController');
+
+        Route::get('/admin/brief/pdf/{id}',[
+        'uses'	=>'BriefController@mi_pdf',
+        'as'	=>'admin.brief.pdf'
+        ]);
+
       Route::resource('ingresos','PaymentController');
+        Route::get('/admin/ingresos/pdf/',[
+        'uses'	=>'PaymentController@pdf',
+        'as'	=>'admin.ingresos.pdf'
+        ]);
       Route::resource('salidas','ExpenseController');
+        Route::get('/admin/salidas/pdf/',[
+        'uses'	=>'ExpenseController@pdf',
+        'as'	=>'admin.salidas.pdf'
+        ]);
       Route::resource('proveedores','ProviderController');
+        Route::get('/admin/proveedores/pdf/',[
+        'uses'	=>'ProviderController@pdf',
+        'as'	=>'admin.proveedores.pdf'
+        ]);
       Route::resource('servicios','ServiceController');
+        Route::get('/admin/servicios/pdf/',[
+        'uses'	=>'ServiceController@pdf',
+        'as'	=>'admin.servicios.pdf'
+        ]);
 
 
 

@@ -8,7 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Brief;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 
+use Illuminate\Support\Facades\Auth;
 
 class BriefController extends Controller
 {

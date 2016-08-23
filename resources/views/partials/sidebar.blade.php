@@ -39,8 +39,8 @@
                 <li class="treeview">
                     <a href="#"><i class='fa fa-user'></i> <span>Usuarios</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('admin.usuarios.index')}}">Listado de usuarios</a></li>
-                        <li><a href="{{route('admin.usuarios.create')}}">Crear usuario</a></li>
+                        <li><a href="{{route('admin.usuarios.create')}}">Crear</a></li>
+                        <li><a href="{{route('admin.usuarios.index')}}">Listado</a></li>
                         <li><a href="{{route('admin.usuarios.pdf',Auth::user()->id)}}" target="_blank">Generar informe</a></li>
 
                     </ul>
@@ -49,8 +49,8 @@
                 <li class="treeview">
                     <a href="#"><i class='fa fa-fire'></i> <span>Projectos</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('admin.projectos.create')}}">Crear Projecto</a></li>
-                        <li><a href="{{route('admin.projectos.index')}}">Listado de projectos</a></li>
+                        <li><a href="{{route('admin.projectos.create')}}">Crear</a></li>
+                        <li><a href="{{route('admin.projectos.index')}}">Listado</a></li>
                         <li><a href="{{route('admin.projectos.pdf')}}"target="_blank">Generar informes</a></li>
 
                     </ul>
@@ -60,8 +60,8 @@
               <li class="treeview">
                   <a href="#"><i class='fa fa-wrench'></i> <span>Seguimientos</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
-                      <li><a href="#">Link in level 2</a></li>
-                      <li><a href="#">Link in level 2</a></li>
+                      <li><a href="{{route('admin.seguimientos.index')}}">Listado</a></li>
+                      <li><a href="{{route('admin.seguimientos.pdf')}}"target="_blank">Generar informes</a></li>
                   </ul>
               </li>
 
@@ -70,8 +70,8 @@
               <li class="treeview">
                   <a href="#"><i class='fa fa-list-alt'></i> <span>Brief</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
-                      <li><a href="#">Link in level 2</a></li>
-                      <li><a href="#">Link in level 2</a></li>
+                        <li><a href="{{route('admin.briefs.index')}}">Listado</a></li>
+
                   </ul>
               </li>
 
@@ -80,8 +80,8 @@
               <li class="treeview">
                   <a href="#"><i class='fa fa-usd'></i> <span>Ingresos</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
-                      <li><a href="#">Link in level 2</a></li>
-                      <li><a href="#">Link in level 2</a></li>
+                    <li><a href="{{route('admin.ingresos.index')}}">Listado</a></li>
+                    <li><a href="{{route('admin.ingresos.pdf')}}"target="_blank">Generar informes</a></li>
                   </ul>
               </li>
 
@@ -90,8 +90,8 @@
               <li class="treeview">
                   <a href="#"><i class='fa fa-tasks'></i> <span>Salidas</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
-                      <li><a href="#">Link in level 2</a></li>
-                      <li><a href="#">Link in level 2</a></li>
+                    <li><a href="{{route('admin.salidas.index')}}">Listado</a></li>
+                    <li><a href="{{route('admin.salidas.pdf')}}"target="_blank">Generar informes</a></li>
                   </ul>
               </li>
 
@@ -100,8 +100,16 @@
               <li class="treeview">
                   <a href="#"><i class='fa fa-cog'></i> <span>Proevedores</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
-                      <li><a href="#">Link in level 2</a></li>
-                      <li><a href="#">Link in level 2</a></li>
+                    <li><a href="{{route('admin.proveedores.index')}}">Listado</a></li>
+                    <li><a href="{{route('admin.proveedores.pdf')}}"target="_blank">Generar informes</a></li>
+                  </ul>
+              </li>
+
+              <!-- /.Servicios -->
+              <li class="treeview">
+                  <a href="#"><i class='fa fa-th-large'></i> <span>Servicios</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">
+                    <li><a href="{{route('admin.servicios.index')}}">Listado</a></li>
                   </ul>
               </li>
         </ul><!-- /.sidebar-menu -->

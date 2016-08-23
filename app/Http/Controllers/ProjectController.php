@@ -88,7 +88,7 @@ class ProjectController extends Controller
         $customers=User::orderBy('name','ASC')->where('role', 'customer')->lists('name','id');
         $developers=User::orderBy('name','ASC')->where('role', 'developer')->lists('name','id');
         $services=Service::orderBy('name','ASC')->lists('name','id');
-        return view('project/create',compact('agents', 'customers','developers'),'services');
+        return view('projects/create',compact('agents', 'customers','developers','services'));
 
     }
 

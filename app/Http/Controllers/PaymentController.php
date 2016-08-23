@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Payment;
 use App\Expense;
+use Barryvdh\DomPDF\Facade as PDF;
 
+use Illuminate\Support\Facades\Auth;
 class PaymentController extends Controller
 {
     /**
