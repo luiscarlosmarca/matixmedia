@@ -48,12 +48,12 @@ class CreateBriefsTable extends Migration
 
             //****Campos de predeterminados ***///
             $table->text('note');
-            $table->integer('iduser_create');//usuario que crea el registro
+            $table->integer('iduser_create')->unsigned();//usuario que crea el registro
             $table->foreign('iduser_create')// el agente de venta
               ->references('id')->on('users')
               ->onUpdate('cascade');
 
-            $table->integer('iduser_update');//usuario que actualiza el registro.
+            $table->integer('iduser_update')->unsigned();//usuario que actualiza el registro.
             $table->foreign('iduser_update')
               ->references('id')->on('users')
               ->onUpdate('cascade');

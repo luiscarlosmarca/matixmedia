@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServicesTable extends Migration
+class CreateProvidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,22 +12,23 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('providers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('details');
-            $table->double('price');
-
+            $table->string('phone');
+            $table->string('email');
+            $table->string('contact');//conctacto de la entidad
+            $table->string('category');// select view category
             $table->timestamps();
 
             //****Campos de predeterminados ***///
             $table->text('note');
-            $table->integer('iduser_create');//usuario que crea el registro
+            $table->integer('iduser_create')->unsigned();//usuario que crea el registro
             $table->foreign('iduser_create')// el agente de venta
               ->references('id')->on('users')
               ->onUpdate('cascade');
 
-            $table->integer('iduser_update');//usuario que actualiza el registro.
+            $table->integer('iduser_update')->unsigned();//usuario que actualiza el registro.
             $table->foreign('iduser_update')
               ->references('id')->on('users')
               ->onUpdate('cascade');
@@ -42,6 +43,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('services');
+        Schema::drop('providers');
     }
 }

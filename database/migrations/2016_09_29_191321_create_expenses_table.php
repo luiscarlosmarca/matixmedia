@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentsTable extends Migration
+class CreateExpensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,31 +12,32 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('expenses', function (Blueprint $table) {
             $table->increments('id');
-      
+            $table->date('date');
+            $table->text('details');
             $table->double('value');
-            $table->string('type');
 
-//** relaciones
-            $table->integer('project_id')->unsigned();
-            $table->foreign('project_id')
-                  ->references('id')->on('projects');
+            //relaciones
+            $table->integer('provider_id')->unsigned();//select proveedores
+            $table->foreign('provider_id')
+              ->references('id')->on('providers')
+              ->onUpdate('cascade');
+
             $table->timestamps();
 
             //****Campos de predeterminados ***///
             $table->text('note');
-            $table->integer('iduser_create');//usuario que crea el registro
+            $table->integer('iduser_create')->unsigned();//usuario que crea el registro
             $table->foreign('iduser_create')// el agente de venta
               ->references('id')->on('users')
               ->onUpdate('cascade');
 
-            $table->integer('iduser_update');//usuario que actualiza el registro.
+            $table->integer('iduser_update')->unsigned();//usuario que actualiza el registro.
             $table->foreign('iduser_update')
-            ->references('id')->on('users')
-            ->onUpdate('cascade');
+              ->references('id')->on('users')
+              ->onUpdate('cascade');
             ////**********************
-
         });
     }
 
@@ -47,6 +48,6 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('payments');
+        Schema::drop('expenses');
     }
 }

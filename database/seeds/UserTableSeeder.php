@@ -11,20 +11,20 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
         //crear los usuarios por defecto en la app, el primero es el usuario admin.
-        
-        DB::table('users')->truncate(); //elimina la bd cada vez que realizo el seed
+
+
 
         factory(App\User::class)->create([
             'name'  =>'luiscarlosmarca',
             'email' =>'app@matixmedia.com.co',
-           
+
             'role'  =>'admin',
-            'password'=>'secret'
+            'password'=>bcrypt('secret')
 
             ]);
-       
+
 
 
     }
