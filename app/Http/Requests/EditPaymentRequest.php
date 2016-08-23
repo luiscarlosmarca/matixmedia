@@ -13,7 +13,7 @@ class EditPaymentRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class EditPaymentRequest extends Request
     public function rules()
     {
         return [
-            //
+          'value'        => 'required|integer',
+
+
+
+          'type'       => 'required|string'
         ];
     }
 }

@@ -19,8 +19,13 @@ class PaymentController extends Controller
      */
      public function index(Request $request)
      { //view for admin, only read: agent and developer,
-       $payments= Payment::filter($request->get('date'));
-       return view('payments/list', compact('payments'));
+       $expenses= Expense::whereBetween('created_at',array($request->get('from'),$request->get('to'))->get());
+       $payments= Payment::whereBetween('created_at',array($request->get('from'),$request->get('to'))->get());
+             //este filtro de fecha seria bueno transladarlo al modelo.
+       $t_payments=$payments->sum('value');
+       $t_expenses=$expenses->sum('value');
+       $total=$t_payments-$t_expenses;
+       return view('payments/list', compact('payments','t_payments','t_expenses','total'));
      }
 
      public function pdf(Request $request)
@@ -32,12 +37,12 @@ class PaymentController extends Controller
      }
 
 
-     public function my_payments()//los Tracing | seguimientos de cada usuario
+     public function my_payments()//los payments | pagos de cada agent o admin
      {//
        $id=Auth::user()->id;
        $user=User::findOrFail($id);
        return view('payments/miPayments', compact('user'));
-       //envio el usuario a la vista, en la vista realizo un ciclo para recoger todos los briefs que tiene este usuario
+       //envio el usuario a la vista, en la vista realizo un ciclo para recoger todos los pagos que tiene este usuario
 
 
      }

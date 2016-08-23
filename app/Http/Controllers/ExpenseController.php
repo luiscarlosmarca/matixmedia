@@ -24,8 +24,13 @@ class ExpenseController extends Controller
     public function index(Request $request)
     {
       //mostrar el total de la caja y el total de gastos
-      $expenses= Expense::filter($request->get('date'));
-      return view('expenses/list', compact('expenses'));
+      $expenses= Expense::whereBetween('created_at',array($request->get('from'),$request->get('to'))->get());
+      $payments= Payment::whereBetween('created_at',array($request->get('from'),$request->get('to'))->get());
+      //este filtro de fecha seria bueno transladarlo al modelo.
+      $t_payments=$payments->sum('value');
+      $t_expenses=$expenses->sum('value');
+      $total=$t_payments-$t_expenses;
+      return view('expenses/list', compact('expenses','t_payments','t_expenses','total'));
     }
 
     public function pdf(Request $request)

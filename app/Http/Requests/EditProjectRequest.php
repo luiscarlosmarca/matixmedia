@@ -24,7 +24,15 @@ class EditProjectRequest extends Request
     public function rules()
     {
         return [
-            //
+          'name'         => 'required|max:255',
+          'details'       => 'required|string',
+
+
+          'dateStart'    => 'required|date|date_format:Y-m-d|before:dateFinish',
+          'dateFinish'   => 'date|date_format:Y-m-d|after:dateStart',
+          'developer_id' => 'required|exists:users,id',
+
+
         ];
     }
 }

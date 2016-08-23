@@ -13,7 +13,7 @@ class CreateTracingtRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class CreateTracingtRequest extends Request
     public function rules()
     {
         return [
-            //
+                'name'    => 'required|max:255',
+                'date'    => 'required|date|date_format:Y-m-d',
+                'state'   => 'required|string',
+                'details'  => 'required|string'
         ];
     }
 }

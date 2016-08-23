@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
-class CreateBrieftRequest extends Request
+use App\Profile;
+class CraeteProfileRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,8 @@ class CreateBrieftRequest extends Request
     public function rules()
     {
         return [
-            'project_id'=> 'required|exists:projects,id',
-            'date'      => 'required|date|date_format:Y-m-d',
-            'file'      =>'required',
-            'details'   => 'string'
+              'email_company'  => 'required|email|max:255',
+              'user_id'        => 'required|unique:profile'
         ];
     }
 }

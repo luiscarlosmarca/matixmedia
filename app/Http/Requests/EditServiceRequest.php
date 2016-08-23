@@ -13,7 +13,7 @@ class EditServiceRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class EditServiceRequest extends Request
     public function rules()
     {
         return [
-            //
+          'name'         => 'required|max:255',
+          'details'       => 'required|string',
+          'price'        => 'required|integer'
         ];
     }
 }

@@ -13,7 +13,7 @@ class CreatePaymentRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class CreatePaymentRequest extends Request
     public function rules()
     {
         return [
-            //
+            'value'        => 'required|integer',
+            'project_id' => 'required|exists:projects,id',
+
+
+            'type'       => 'required|string'
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
+use App\User;
 class CreateUserRequest extends Request
 {
     /**
@@ -13,7 +13,7 @@ class CreateUserRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class CreateUserRequest extends Request
     public function rules()
     {
         return [
-            //
+          'name'      => 'required|max:255',
+          'email'     => 'required|email|max:255|unique:users',
+          'password'  => 'required|confirmed|min:6',
+          'role'      => 'required|string|in:developer,agent,costumer',
+          'photo'     => 'required|image',
+          'cedula'    => 'required|unique:users'
         ];
     }
 }

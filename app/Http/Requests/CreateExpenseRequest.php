@@ -13,7 +13,7 @@ class CreateExpenseRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class CreateExpenseRequest extends Request
     public function rules()
     {
         return [
-            //
+          'value'         => 'required|integer',
+          'date'          => 'required|date|date_format:Y-m-d',
+          'details'       => 'required|string',
+          'provider_id'   => 'required|exists:providers,id'
         ];
     }
 }

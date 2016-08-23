@@ -11,6 +11,8 @@ use App\Profile;
 use \Input as Input;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\EditUserRequest;
+use App\Http\Requests\CreateProfileRequest;
+use App\Http\Requests\EditProfileRequest;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -130,7 +132,7 @@ class UserController extends Controller
 
       }
       $profiles = new Profile($request->all());
-      $profiles->photo=$name;
+      $profiles->curriculum=$name;
       $profiles->save();
       Session::flash('message',$profiles->user->name.'  Ha actaualizdo su perfil');
       return redirect()->route('profiles');
