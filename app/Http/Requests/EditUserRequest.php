@@ -3,9 +3,15 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
+use Illuminate\Routing\Route;
 class EditUserRequest extends Request
 {
+  private $route;
+ 	public function __construct(Route $route)
+ 	{
+ 		$this->route=$route;
+
+ 	}
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,9 +31,12 @@ class EditUserRequest extends Request
     {
         return [
           'name'      => 'required|max:255',
-          'email'     => 'required|email|max:255|unique:users',
-          'cedula'    => 'required|unique:users'
-          'photo'     => 'required|image',
+
+          'cedula'=>'required|integer|unique:users,cedula,'.$this->route->getParameter('usuarios'),
+      		'email'=>'required|email|unique:users,email,'.$this->route->getParameter('usuarios'),
+
+
+          'photo'     => 'image'
         ];
     }
 }

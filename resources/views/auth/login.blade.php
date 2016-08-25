@@ -55,8 +55,8 @@
     </div><!-- /.social-auth-links -->
 
     <a href="{{ url('/password/email') }}">Olvide mi contraseña</a><br>
-    <a href="{{ url('/auth/register') }}" class="text-center">Crear una cuenta</a>
-
+  <!--  <a href="{{ url('/auth/register') }}" class="text-center">Crear una cuenta</a>
+-->
 </div><!-- /.login-box-body -->
 
 </div><!-- /.login-box -->

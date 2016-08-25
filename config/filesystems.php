@@ -45,8 +45,43 @@ return [
 
         'local' => [
             'driver' => 'local',
-          //  'root'   => storage_path('app'),
+            'root'   => storage_path('app'),
         ],
+
+        'users' => [
+            'driver' => 'local',
+            'root'   => public_path('upload/users'),
+        ],
+
+        'projects' => [
+            'driver' => 'local',
+            'root'   => public_path('updload/projects'),
+        ],
+        'files' => [
+            'driver' => 'local',
+            'root'   => public_path('upload/projects/files'),
+        ],
+        'contracts' => [
+            'driver' => 'local',
+            'root'   => public_path('upload/projects/contracts'),
+        ],
+
+        'tracings' => [
+            'driver' => 'local',
+            'root'   => public_path('upload/projects/tracings'),
+        ],
+
+
+        'briefs' => [
+            'driver' => 'local',
+            'root'   => public_path('upload/projects/briefs'),
+        ],
+
+        'profiles' => [
+            'driver' => 'local',
+            'root'   => public_path('upload/users/profiles'),
+        ],
+
 
         'ftp' => [
             'driver'   => 'ftp',

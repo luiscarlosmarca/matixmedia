@@ -26,7 +26,7 @@ class CreateProfilesTable extends Migration
             $table->string('social');// algun enlace alguna red social.
             $table->string('salary');//acuerdo de pago con el developer o agent
             $table->date('feNa');
-
+            $table->text('note');
             //relaciones con la tabla usuario
             $table->integer('user_id',10)->unsigned();
             $table->foreign('user_id')->references('id')

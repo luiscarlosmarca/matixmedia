@@ -10,7 +10,7 @@ class Role
         'admin' =>  4,
         'agent'=> 3,
         'developer'  =>  2,
-        'costumer' =>1
+        'costomer' =>1
     ];
     /**
      * Handle an incoming request.

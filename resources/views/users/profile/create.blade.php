@@ -9,12 +9,20 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-default">
-				<div class="panel-heading">perfil de {{$user->name}}</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">Detalles del perfil de {{$user->name}}</div>
 
-				<div class="panel-body">
-					Bienvenidos
-				</div>
+        {!!Form::open(['route'=>'usuarios.update_profile','method'=>'POST','enctype'=>'multipart/form-data'])!!}
+
+  				<div class="panel-body">
+  				@include('users/profile/partials/fields')
+          <button type="submit" class="btn btn-primary">
+            Guardar
+          </button>
+
+
+          </div>
+      {!! Form::close() !!}
 			</div>
 		</div>
 	</div>

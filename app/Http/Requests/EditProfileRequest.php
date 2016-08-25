@@ -24,7 +24,9 @@ class EditProfileRequest extends Request
     public function rules()
     {
         return [
-            'email_company'  => 'required|email|max:255'
+            'email_company'  => 'email|max:255',
+            'curriculum'     =>'mimes:pdf,zip,rar',
+            'password'       => 'confirmed|min:6'
         ];
     }
 }

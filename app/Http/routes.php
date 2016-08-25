@@ -41,6 +41,20 @@ Route::get('logout', 'Auth\AuthController@getLogout');
 
 Route::group(['middleware'=>'auth'], function(){
 
+    Route::get('/perfil/{id}',[
+    'uses'	=>'UserController@edit_profile',
+    'as'	=>'perfil.edit'
+    ]);
+
+
+    Route::patch('/perfil/{id}',[
+      'uses'=>'UserController@update_profile',
+      'as'  =>'perfil.update'
+    ]);
+
+  
+
+
       /**
       //Segundo filtro. role-> admin
        */
@@ -53,27 +67,26 @@ Route::group(['middleware'=>'auth'], function(){
 
       Route::resource('usuarios','UserController');
 
+
+
         Route::get('/admin/usuarios/pdf/',[
         'uses'	=>'UserController@pdf',
         'as'	=>'admin.usuarios.pdf'
         ]);
-        Route::get('/admin/usuarios/perfil/',[
-        'uses'	=>'UserController@create_profile',
-        'as'	=>'admin.usuarios.perfil'
-        ]);
+
 
       Route::resource('projectos','ProjectController');
 
-        Route::get('/admin/projectos/pdf/',[//listado de los proyectos mas recientes
+        Route::get('/projectos/pdf/',[//listado de los proyectos mas recientes
         'uses'	=>'ProjectController@pdf',
         'as'	=>'admin.projectos.pdf'
         ]);
-        Route::get('/admin/projecto/pdf/{id}',[//listado de los proyectos mas recientes
+        Route::get('/projecto/pdf/{id}',[//listado de los proyectos mas recientes
         'uses'	=>'ProjectController@mi_pdf',
         'as'	=>'admin.projecto.pdf'
         ]);
 
-        Route::get('/admin/projecto/registrar_ingreso/{id}',[
+        Route::get('/projecto/registrar_ingreso/{id}',[
         'uses'	=>'ProjectController@create_payment',
         'as'	  =>'admin.projecto.add_ingresos'
         ]);

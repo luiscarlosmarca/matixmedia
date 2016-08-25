@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,12 +10,14 @@ use App\Profile;
 use \Input as Input;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\EditUserRequest;
-use App\Http\Requests\CreateProfileRequest;
+
 use App\Http\Requests\EditProfileRequest;
 use Illuminate\Support\Facades\Session;
 use Barryvdh\DomPDF\Facade as PDF;
-
+use Storage;
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -28,7 +29,9 @@ class UserController extends Controller
     public function index(Request $request)
     {
       //only admin
-      $user= User::filter($request->get('name'),$request->get('role'),$request->get('cedula'));
+
+      $users= User::filter($request->get('name'),$request->get('role'),$request->get('cedula'));
+
       return view('users/list', compact('users'));
     }
 
@@ -39,6 +42,7 @@ class UserController extends Controller
      */
     public function create()
     {
+
         return view('users/create');
     }
 
@@ -50,24 +54,33 @@ class UserController extends Controller
      */
      public function store(CreateUserRequest $request)
        {
+
            $id=Auth::user()->id;
+
            if($request->file('photo'))
            {
 
                $file = $request->file('photo');
                $name = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
-               $path = public_path().'/upload/users/';
+              // $path = public_path().'/upload/users/';
 
-               $file->resize(120,120)->move($path,$name);
+              // $file->move($path,$name);
+               Storage::disk('users')->put($name,  \File::get($file));
 
            }
            $users = new User($request->all());
-           //$users->iduser_create->$id;
+           $users->iduser_create=$id;
 
            $users->photo=$name;
            $users->save();
-           Session::flash('message',$users->name.'  Fue creado');
-           return redirect()->route('users');
+
+           $profiles = new Profile();
+
+           $profiles->user_id=$users->id;
+           $profiles->save();
+
+           Session::flash('message','El usuario '.$users->name.'  Fue creado exitosamente');
+           return redirect()->route('admin.usuarios.index');
 
 
        }
@@ -83,14 +96,32 @@ class UserController extends Controller
     public function update(EditUserRequest $request,$id)
 
       {
-        dd($id);
-              $user=User::findOrFail($id);
-              //$users->iduser_update->$id;
+              $id_user=Auth::user()->id;
+              $users=User::findOrFail($id);
+
+            //  if($request->file('photo'))
+              //{
+
+                              // $file = $request->file('photo');
+                              // $name = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
+                              // $path = public_path().'/upload/users/';
+
+                              // $file->move($path,$name);
+                               //Storage::disk('users')->put($name,  \File::get($file));
+
+              //}
+
+
+          //    $users->photo=$name;
+
+              $users->iduser_update=$id_user;
+
               $users->fill($request->all());
+
               $users->save();
 
               Session::flash('message',$users->name.' Se actualizo');
-              return redirect()->route('users');
+              return redirect()->route('admin.usuarios.index');
 
       }
 
@@ -98,50 +129,74 @@ class UserController extends Controller
     {
         /// falta insertar el componente pdf
       //  $id=Auth::user()->id;
+      $users= User::orderBy('name', 'desc')->get();
+      $pdf = PDF::loadView('users/pdf',compact('users'));
+      return $pdf->stream();
 
-        $users=User::orderBy('name', 'desc')->get();
-        $pdf = PDF::loadView('users/pdf',compact('users'));
-        return $pdf->stream();
+
     }
       //******  perfil**********************************###################
       //###########################################################
       //#########################################################
 
 
-    public function create_profile()
+    public function edit_profile($id)
     {
-      $id=Auth::user()->id;//toma el id del usuario que esta conectado
-      $user=user::findOrFail($id);
-      return view('users/profile/create',compact('user'));//envia el usuario para agregar el usuario
+
+
+      $profile=Profile::findOrFail($id);
+      return view('users/profile/edit',compact('profile'));//envia el usuario para agregar el usuario
       //con este usario ya se puede hacer condicional en la vista.
     }
-    public function edit_profile()
+
+
+
+    public function edit_profiles()
       {
-         $id=Auth::user()->id;//toma el id del usuario que esta conectado
+         $id=Auth::user()->id;//desde el admin
          $profile=Profile::findOrFail($id);
-         return view('users/profile/edit',compact('profile'));
+         return view('users/profile/create',compact('profile'));
          //en la vista hacer el condicional para mostrar el perfil correcto y solo permitir editar algunos campos.
          //algunos campos en la vista que no podra editar como el cargo, del personal o el rendimiento
       }
 
 
-    public function store_profile(Request $request)
+    public function update_profile(EditProfileRequest $request,$id)
 
     {
+      $profiles=Profile::findOrFail($id);
+
+      $name="";
       if($request->file('curriculum'))
       {
 
           $file = $request->file('curriculum');
           $name = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
-          $path = public_path().'/upload/users/profiles';
-          $file->move($path,$name);
+
+          Storage::disk('profiles')->put($name,  \File::get($file));
+
 
       }
-      $profiles = new Profile($request->all());
+
+      $profiles->fill($request->all());
       $profiles->curriculum=$name;
       $profiles->save();
-      Session::flash('message',$profiles->user->name.'  Ha actaualizdo su perfil');
-      return redirect()->route('profiles');
+
+      $id_user=Auth::user()->id;
+
+      $users=User::findOrFail($id_user);
+      $users->iduser_update=$id_user;
+
+      $users->save();
+
+      Session::flash('message','El usuario '.$profiles->user->name.' Actualizo su perfil exitosamente');
+      return redirect()->route('home');
+
+
+
+
+
+
 
     }
 

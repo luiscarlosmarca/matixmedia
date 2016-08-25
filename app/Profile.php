@@ -10,7 +10,7 @@ class Profile extends Model
 {
     //
     protected $table = 'profiles';
-    protected $fillable = ['name_company','address_company','phone_company','email_company','reference','city','curriculum','position','efficiency','social','user_id'];
+    protected $fillable = ['name_company','address_company','phone_company','email_company','reference','city','curriculum','position','efficiency','social','user_id','feNa'];
 
  ///** Relaciones
     public function user()

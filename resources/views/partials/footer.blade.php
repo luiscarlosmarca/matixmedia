@@ -5,4 +5,4 @@
         <a href="http://matixmedia.com.co"></a><b>Matix Media</b></a> "Su información es nuestro tesoro".
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="http://acacha.org">Matix Media - CO</a>.</strong>
+    <strong>Desarrollo &copy; 2016 <a href="twitter.com/luiscarlosmarca">Luis Carlos Marin Campos</a>.</strong>

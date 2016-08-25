@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\Session;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -28,7 +29,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password','role','photo','address','cellphone'];
+    protected $fillable = ['name', 'email', 'password','role','photo','address','cellphone','cedula'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -87,7 +88,34 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Provider');
     }
 
+    public function admin()// para el condicional en la vissta
+    {
+        return $this->role ==='admin';
+    }
+
+    public function developer()
+    {
+        return $this->role ==='developer';
+    }
+
+    public function agent()
+    {
+        return $this->role ==='agent';
+    }
+    public function customer()
+    {
+        return $this->role ==='customer';
+    }
     ///******* metodos ***********
+
+    public function setPasswordAttribute($value)
+    {
+      if(! empty($value))
+      {
+      $this->attributes['password']=bcrypt($value);
+      }
+    }
+
 
     public function scopeName($query,$name)// Buscar por el nombre
     {
@@ -131,7 +159,7 @@ class User extends Model implements AuthenticatableContract,
           ->role($role)
           ->cedula($cedula)
           ->orderBy('created_at','DESC')
-          ->paginate(15);
+          ->paginate(3);
     }
 
 
