@@ -45,8 +45,8 @@ class CreateProjectsTable extends Migration
             $table->timestamps();
                 //****Campos de predeterminados ***///
             $table->text('note');
-            $table->integer('iduser_create')->unsigned();//usuario que crea el registro
-            $table->foreign('iduser_create')// el agente de venta
+            $table->integer('agent_id')->unsigned();//usuario que crea el registro
+            $table->foreign('agent_id')// el agente de venta
                 ->references('id')->on('users')
                 ->onUpdate('cascade');
 

@@ -9,32 +9,32 @@ use Illuminate\Support\Facades\Session;
 class Project extends Model
 {
     protected $table = 'projects';
-    protected $fillable = ['details','name','price','service_id','developer_id','costumer_id','iduser_create','iduser_update','note','formPay','contract','file','dateStart','dateFinish'];
+    protected $fillable = ['details','name','price','service_id','developer_id','costumer_id','agent_id','iduser_update','note','formPay','contract','file','dateStart','dateFinish'];
 
 //****relaciones
 // Duda, como saber cual campo conecta con cual rol, pues es la misma tabla.??
   public function agent()
   {
    //un projecto esta acargo de un agente comercial
-   return $this->belongTo('App\User');
+   return $this->belongsTo('App\User');
   }
 
   public function costumer()
   {
    //un projecto esta enlazado con la cuenta de un cliente
-   return $this->belongTo('App\User');
+   return $this->belongsTo('App\User');
   }
 
   public function developer()
   {
    //un projecto esta acargo de un desarrollador, a futoro toca hacer una tabla pivot para los equitpos de desarrolladores
-   return $this->belongTo('App\User');
+   return $this->belongsTo('App\User');
   }
 
   public function service()
   {
    //un projecto esta enlzada con un servicio
-   return $this->belongTo('App\Service');
+   return $this->belongsTo('App\Service');
   }
 
   public function tracings()
@@ -70,7 +70,7 @@ class Project extends Model
   public static function filter($name)
   {
       return Project::name($name)
-        ->orderBy('created_at','DESC')
+        ->orderBy('dateFinish','DESC')
         ->paginate(10);
   }
 

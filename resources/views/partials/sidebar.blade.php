@@ -44,7 +44,7 @@
                     <ul class="treeview-menu">
                         <li><a href="{{route('admin.usuarios.create')}}">Crear</a></li>
                         <li><a href="{{route('admin.usuarios.index')}}">Listado</a></li>
-                        <li><a href="{{route('admin.usuarios.pdf',Auth::user()->id)}}" target="_blank">Generar informe</a></li>
+                        <li><a href="{{route('admin.usuarios.pdf')}}" target="_blank">Generar informe</a></li>
 
                     </ul>
                 </li>

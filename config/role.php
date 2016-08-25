@@ -6,7 +6,7 @@ return array(
 
 		'developer'	=>'Developer',
 		'agent'			=>'Agente',
-		'customer'	=>'Cliente'
+		'costumer'	=>'Cliente'
 
 	]
 

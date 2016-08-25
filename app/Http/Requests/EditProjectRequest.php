@@ -13,7 +13,7 @@ class EditProjectRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

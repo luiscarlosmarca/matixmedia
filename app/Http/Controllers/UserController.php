@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Profile;
+use App\Profile; 
 use \Input as Input;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\EditUserRequest;

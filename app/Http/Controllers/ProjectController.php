@@ -50,9 +50,13 @@ class ProjectController extends Controller
     {
       /// listado en pdf, de los projectos mas recientes con los datos mas importantes.
        $projects=Project::orderBy('name', 'desc')->get();
-       $pdf = PDF::loadView('projects.pdf',compact('projects'));
+       $pdf = PDF::loadView('projects/pdf',compact('projects'));
        //ciclo para recorrer el array
        return $pdf->stream();
+
+
+
+
     }
 
     public function my_projects()//los projectos de cada usuario
@@ -81,14 +85,14 @@ class ProjectController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+       */
     public function create()
     {
-        $agents=User::orderBy('name','ASC')->where('role','agent')->lists('name','id');
-        $customers=User::orderBy('name','ASC')->where('role', 'customer')->lists('name','id');
+
+        $costumers=User::orderBy('name','ASC')->where('role', 'costumer')->lists('name','id');
         $developers=User::orderBy('name','ASC')->where('role', 'developer')->lists('name','id');
         $services=Service::orderBy('name','ASC')->lists('name','id');
-        return view('projects/create',compact('agents', 'customers','developers','services'));
+        return view('projects/create',compact('agents', 'costumers','developers','services'));
 
     }
 
@@ -98,7 +102,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateProjectRequest $request,$action)
+    public function store(CreateProjectRequest $request)
     {
          $id=Auth::user()->id;
 
@@ -118,19 +122,20 @@ class ProjectController extends Controller
          }
 
          $projects = new Project($request->all());
-         $projects->iduser_create->$id;
+         $projects->agent_id=$id;
+         $projects->iduser_update=$id;
          $projects->file=$name_file;
          $projects->contract=$name_contract;
          $projects->save();
 
-         if($action=='save_new')
-         {
-           return redirect()->route('projects.create');
-
-         }
-           else {
-              return redirect()->back();
-           }
+        //  if($action=='save_new')
+        //  {
+          return redirect()->route('admin.projectos.index');
+         //
+        //  }
+        //    else {
+            //  return redirect()->back();
+        //   }
 
 
          Session::flash('message',$projects->name.'  Fue creado');
@@ -156,8 +161,10 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
+        $developers=User::orderBy('name','ASC')->where('role', 'developer')->lists('name','id');
+        $services=Service::orderBy('name','ASC')->lists('name','id');
         $project=Project::findOrFail($id);
-        return view('projects/edit',compact('project'));
+        return view('projects/edit',compact('project','developers','services'));
     }
 
     /**
@@ -171,34 +178,34 @@ class ProjectController extends Controller
     {
       $id_user=Auth::user()->id;
       $projects=Project::findOrFail($id);
-      $contract_old=$projects->contract;
-      $file_old=$projects->file;
-      if($request->file('contract'))
-      {
-          $contract = $request->file('contract');
-          $name_contract = 'Appmm_'.time().'.'.$contract->getClientOriginalExtension();
-          $path = public_path().'/upload/projects/contracts/';
-          $contract->move($path,$name_contract);
+      // $contract_old=$projects->contract;
+      // $file_old=$projects->file;
+      // // if($request->file('contract'))
+      // {
+      //     $contract = $request->file('contract');
+      //     $name_contract = 'Appmm_'.time().'.'.$contract->getClientOriginalExtension();
+      //     $path = public_path().'/upload/projects/contracts/';
+      //     $contract->move($path,$name_contract);
+      //
+      //     Storage::delete($path . $contract_old);
+      // }
+      // if($request->file('file'))
+      // {
+      //     $file = $request->file('file');
+      //     $name_file = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
+      //     $path = public_path().'/upload/projects/files/';
+      //     $file->move($path,$name_file);
+      //     Storage::delete($path . $file_old);
+      // }
 
-          Storage::delete($path . $contract_old);
-      }
-      if($request->file('file'))
-      {
-          $file = $request->file('file');
-          $name_file = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
-          $path = public_path().'/upload/projects/files/';
-          $file->move($path,$name_file);
-          Storage::delete($path . $file_old);
-      }
-
-      $projects->iduser_update->$id_user;
-      $projects->file=$name_file;
-      $projects->contract=$name_contract;
+      $projects->iduser_update=$id_user;
+      // $projects->file=$name_file;
+      // $projects->contract=$name_contract;
       $projects->fill($request->all());
       $projects->save();
 
       Session::flash('message',$projects->name.' Se actualizo');
-      return redirect()->back();
+      return redirect()->route('admin.projectos.index');
     }
 
     /**

@@ -6,7 +6,7 @@
 
 
 @section('main-content')
-<div class="container">
+<div class="container-fluid">
 
 	<div class="row">
     @if (Session::has('message'))
@@ -15,7 +15,7 @@
 
       @endif
 
-		<div class="col-md-10 col-md-offset-1">
+
 
       	<div class="panel panel-primary">
 

@@ -31,7 +31,7 @@
 		                        <td>{{$user->role}}</td>
 		                        <td>{{$user->email}}</td>
 														<td>{{$user->address}}</td>
-														<td>{{$user->phone}}</td>
+														<td>{{$user->cellphone}}</td>
 
 		                    </tr>
 		                    @endforeach
