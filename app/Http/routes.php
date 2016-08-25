@@ -52,7 +52,7 @@ Route::group(['middleware'=>'auth'], function(){
       'as'  =>'perfil.update'
     ]);
 
-  
+
 
 
       /**
@@ -77,21 +77,21 @@ Route::group(['middleware'=>'auth'], function(){
 
       Route::resource('projectos','ProjectController');
 
-        Route::get('/projectos/pdf/',[//listado de los proyectos mas recientes
+        Route::get('/admin/projectos/pdf/',[//listado de los proyectos mas recientes
         'uses'	=>'ProjectController@pdf',
         'as'	=>'admin.projectos.pdf'
         ]);
-        Route::get('/projecto/pdf/{id}',[//listado de los proyectos mas recientes
+        Route::get('admin/projecto/mi_pdf/{id}',[//listado de los proyectos mas recientes
         'uses'	=>'ProjectController@mi_pdf',
-        'as'	=>'admin.projecto.pdf'
+        'as'	=>'admin.projecto.mi_pdf'
         ]);
 
-        Route::get('/projecto/registrar_ingreso/{id}',[
+        Route::get('admin/projecto/registrar_ingreso/{id}',[
         'uses'	=>'ProjectController@create_payment',
         'as'	  =>'admin.projecto.add_ingresos'
         ]);
 
-        Route::post('/admin/projecto/registrar_ingreso/',[
+        Route::post('admin/admin/projecto/registrar_ingreso/',[
           'uses'=>'ProjectController@store_payment',
           'as'  =>'admin.projecto.store_ingresos'
         ]);

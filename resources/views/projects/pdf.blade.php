@@ -14,24 +14,30 @@
 		<table class="table table-condensed" border="1">
 		        <thead>
 		                      <tr>
-		                          <th>cedula</th>
 		                          <th>Nombre</th>
-		                          <th>Role</th>
-		                          <th>Email</th>
-															<th>Dirección</th>
+															<th>Cliente</th>
+															<th>Email</th>
 															<th>Telefono</th>
+		                          <th>Servicio</th>
+
+															<th>Agente</th>
+															<th>developer</th>
+															<th>fecha de entrega</th>
+
 
 		                      </tr>
 		        </thead>
 		        <tbody>
 		                    @foreach ($projects as $project)
 		                    <tr>
-		                        <td>{{$project->cedula}}</td>
 		                        <td>{{$project->name}}</td>
-		                        <td>{{$project->role}}</td>
-		                        <td>{{$project->email}}</td>
-														<td>{{$project->address}}</td>
-														<td>{{$project->cellphone}}</td>
+														<td>{{$project->costumer->name}}</td>
+														<td>{{$project->costumer->email}}</td>
+		                        <td>{{$project->costumer->cellphone}}</td>
+		                        <td>{{$project->service->name}}</td>
+														<td>{{$project->agent->name}}</td>
+														<td>{{$project->developer->name}}</td>
+														<td>{{$project->dateFinish}}</td>
 
 		                    </tr>
 		                    @endforeach

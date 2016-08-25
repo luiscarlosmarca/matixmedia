@@ -42,7 +42,7 @@ class ProjectController extends Controller
     {
       /// Para generar pdf de cada projecto, por separado.
        $project=Project::findOrFail($id);
-       $pdf = PDF::loadView('projects.pdf',compact('project'));
+       $pdf = PDF::loadView('projects/mi_pdf',compact('project'));
        return $pdf->stream();
     }
 
@@ -211,6 +211,10 @@ class ProjectController extends Controller
     /**
     // Payment  - Ingresos
      */
+    public function mi_payments($id)
+    {
+      //los ingresos de un proyecto.
+    }
     public function create_payment($id)
       {
         $project=Project::findOrFail($id);
