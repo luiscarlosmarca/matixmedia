@@ -25,7 +25,7 @@ class CreatePaymentRequest extends Request
     {
         return [
             'value'        => 'required|integer',
-            'project_id' => 'required|exists:projects,id',
+            'project_id'   => 'required|exists:projects,id',
 
 
             'type'       => 'required|string'

@@ -14,7 +14,7 @@
 			<div class="panel panel-success">
 
 
-				<div class="panel-heading">Editar usuario  {{$user->name}}  </div>
+				<div class="panel-heading">  <h3>Editar usuario  {{$user->name}}  </h3>  </div>
 
 
     				<div class="panel-body">

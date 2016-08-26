@@ -31,8 +31,11 @@
                                   </button>
                                   <ul class="dropdown-menu">
                                     <li><a href="{{route('admin.projectos.edit',$project)}}">Actualizar</a></li>
+                                    <li><a href="{{route('admin.projecto.ingresos',$project)}}">Ingresos</a></li>
+                                    <li><a href="{{route('admin.projecto.seguimientos',$project)}}">Seguimientos</a></li>
+
                                     <li><a href="{{route('admin.projecto.mi_pdf',$project)}}">Ver en pdf</a></li>
-                                  
+
                                   </ul>
                                 </div>
                           </td>

@@ -14,7 +14,7 @@
 			<div class="panel panel-primary">
 
 
-				<div class="panel-heading">Crear usuarios </div>
+				<div class="panel-heading"><h3>Crear usuarios</h3> </div>
 
 
     				<div class="panel-body">

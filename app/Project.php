@@ -71,7 +71,7 @@ class Project extends Model
   {
       return Project::name($name)
         ->orderBy('dateFinish','DESC')
-        ->paginate(10);
+        ->paginate(5);
   }
 
 

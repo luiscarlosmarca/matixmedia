@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Detalles del perfil de {{$user->name}}</div>
+				<div class="panel-heading">  <h3>Detalles del perfil de {{$user->name}}  </h3></div>
 
         {!!Form::open(['route'=>'usuarios.update_profile','method'=>'POST','enctype'=>'multipart/form-data'])!!}
 

@@ -28,10 +28,10 @@ class CreateTracingsTable extends Migration
                   ->onUpdate('cascade');
 
 
-            $table->integer('pay_id')->unsigned();//para ingresar algun pago asociado opcoines
-            $table->foreign('pay_id')
-                    ->references('id')->on('payments')
-                    ->onUpdate('cascade');
+            // $table->integer('pay_id')->unsigned();//para ingresar algun pago asociado opcoines
+            // $table->foreign('pay_id')
+            //         ->references('id')->on('payments')
+            //         ->onUpdate('cascade');
 
             $table->timestamps();
 

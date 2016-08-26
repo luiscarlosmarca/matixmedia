@@ -81,9 +81,14 @@ Route::group(['middleware'=>'auth'], function(){
         'uses'	=>'ProjectController@pdf',
         'as'	=>'admin.projectos.pdf'
         ]);
-        Route::get('admin/projecto/mi_pdf/{id}',[//listado de los proyectos mas recientes
+        Route::get('admin/projecto/mi_pdf/{id}',[//ver pdf de cada projecto
         'uses'	=>'ProjectController@mi_pdf',
         'as'	=>'admin.projecto.mi_pdf'
+        ]);
+
+        Route::get('/admin/projecto/ingresos/{id}',[/// ingresoso
+        'uses'	=>'ProjectController@list_payments',
+        'as'  	=>'admin.projecto.ingresos'
         ]);
 
         Route::get('admin/projecto/registrar_ingreso/{id}',[
@@ -106,6 +111,10 @@ Route::group(['middleware'=>'auth'], function(){
         'as'	=>'admin.projecto.update_ingresos'
         ]);
 
+        Route::get('/admin/projecto/seguimientos/{id}',[/// seguimientos
+        'uses'	=>'ProjectController@list_tracings',
+        'as'  	=>'admin.projecto.seguimientos'
+        ]);
         Route::get('/admin/projecto/registrar_seguimiento/{id}',[
         'uses'	=>'ProjectController@create_tracing',
         'as'	  =>'admin.projecto.add_tracing'

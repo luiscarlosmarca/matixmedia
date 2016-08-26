@@ -52,6 +52,6 @@ class Tracing extends Model
       return Tracing::date($date)
         ->state($state)
         ->orderBy('created_at','DESC')
-        ->paginate(15);
+        ->paginate(5);
   }
 }

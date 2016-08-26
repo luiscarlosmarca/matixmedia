@@ -211,9 +211,12 @@ class ProjectController extends Controller
     /**
     // Payment  - Ingresos
      */
-    public function mi_payments($id)
+
+    public function list_payments($id)//listar ingresos de cada proyecto para no hacer la vista de
+    // proyectos muy larga.
     {
-      //los ingresos de un proyecto.
+      $project=Project::findOrFail($id);
+      return view('projects/payments/list',compact('project'));
     }
     public function create_payment($id)
       {
@@ -224,22 +227,26 @@ class ProjectController extends Controller
 
       public function store_payment(CreatePaymentRequest $request)
       {
+
         $id=Auth::user()->id;
         $payments = new Payment($request->all());
-        $payments->iduser_create->$id;
+        $payments->user_id=$id;
+        $payments->iduser_update=$id;
+
         $payments->save();
 
-        if($action=='save_new')
-        {
-          return redirect()->route('payment.create');
-
-        }
-          else {
-             return redirect()->back();
-          }
+        // if($action=='save_new')
+        // {
+          return redirect()->route('admin.projectos.index');
+        //
+        // }
+        //   else {
+             //return redirect()->back();
+        //  }
 
 
         Session::flash('message','El projecto: '.$payments->project->name.' realizo un ingreso');
+        Session::flash('message',$payments->value.' Se actualizo');
 
       }
 
@@ -265,6 +272,13 @@ class ProjectController extends Controller
       /**
       // Tracing  - seguimientos
        */
+
+    public function list_tracings($id)//listar seguimientos de cada proyecto para no hacer la vista de
+       // proyectos muy larga.
+       {
+         $project=Project::findOrFail($id);
+         return view('projects/tracings/list',compact('project'));
+       }
 
     public function create_tracing($id)
        {

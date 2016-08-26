@@ -9,18 +9,18 @@ use Illuminate\Support\Facades\Session;
 class Payment extends Model
 {
   protected $table = 'payments';
-  protected $fillable = ['value','type','project_id','iduser_create','iduser_update','note'];
+  protected $fillable = ['value','type','project_id','user_id','iduser_update','note'];
 ////** relaciones
   public function project()
   {
    //Cada pago pertenece a un proyecto
-   return $this->belongTo('App\Project');
+   return $this->belongsTo('App\Project');
   }
 
   public function user()
   {
    //Cada pago es registrado y actualizado por un usuario
-   return $this->belongTo('App\User');
+   return $this->belongsTo('App\User');
   }
 
 

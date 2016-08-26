@@ -19,7 +19,7 @@
       	<div class="panel panel-primary">
 
             <div class="panel-heading">
-                    Listado de projectos
+                    <h3>Listado de projectos</h3>
 
               </div>
 

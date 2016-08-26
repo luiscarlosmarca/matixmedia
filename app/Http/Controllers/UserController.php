@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Profile; 
+use App\Profile;
 use \Input as Input;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\EditUserRequest;
@@ -29,7 +29,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
       //only admin
-
+ 
       $users= User::filter($request->get('name'),$request->get('role'),$request->get('cedula'));
 
       return view('users/list', compact('users'));
