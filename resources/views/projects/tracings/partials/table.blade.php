@@ -18,9 +18,16 @@
                         <td>{!!$tracing->details!!}</td>
                         <td>{{$tracing->state}}</td>
                         <td>{{$tracing->phase}}</td>
-                        <a href="/upload/projects/tracings/{{$tracing->file}}" target="_blank" class="thumbnail">
-                          Descargar
+                        <td>{!!$tracing->note!!}</td>
+                        <td>
+                          @if($tracing->file!="")
+                          <a href="/upload/projects/tracings/{{$tracing->file}}"class="btn btn-default"  target="_blank" class="thumbnail" >
+                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>  Descargar Archivos
+                          </a>
+                          @endif
+
                         </a>
+                        </td>
 
 
                     </tr>

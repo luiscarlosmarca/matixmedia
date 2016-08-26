@@ -13,7 +13,7 @@
 				<div class="panel-heading">Inicio</div>
 
 				<div class="panel-body">
-					Bienvenidos
+				{{$briefs->project->name}}
 				</div>
 			</div>
 		</div>

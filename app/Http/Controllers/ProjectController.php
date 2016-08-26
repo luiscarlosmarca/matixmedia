@@ -128,6 +128,9 @@ class ProjectController extends Controller
          $projects->contract=$name_contract;
          $projects->save();
 
+        Session::flash('message',$projects->name.'  Fue creado exitosamente');
+
+
         //  if($action=='save_new')
         //  {
           return redirect()->route('admin.projectos.index');
@@ -234,6 +237,7 @@ class ProjectController extends Controller
         $payments->iduser_update=$id;
 
         $payments->save();
+        Session::flash('message','El projecto: '.$payments->project->name.' realizo un ingreso');
 
         // if($action=='save_new')
         // {
@@ -245,8 +249,8 @@ class ProjectController extends Controller
         //  }
 
 
-        Session::flash('message','El projecto: '.$payments->project->name.' realizo un ingreso');
-        Session::flash('message',$payments->value.' Se actualizo');
+
+
 
       }
 
@@ -282,37 +286,44 @@ class ProjectController extends Controller
 
     public function create_tracing($id)
        {
-         $proyect=Project::findOrFail($id);
+         $project=Project::findOrFail($id);
 
          return view('projects/tracings/create',compact('project'));
        }
 
     public function store_tracing(CreateTracingRequest $request)
        {
+
          $id=Auth::user()->id;
+
          if($request->file('file'))
          {
+           // nose porque no entra a este ciclo y no tomar el archivo.pro
              $file = $request->file('file');
              $name = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
-             $path = public_path().'/upload/projects/tracing/';
-             $file->move($path,$name);
+
+             Storage::disk('tracings')->put($name,  \File::get($file));
+             dd($name);
          }
+
          $tracings = new Tracing($request->all());
-         $tracings->iduser_create->$id;
-         $tracing->file->$name;
+         $tracings->user_id=$id;
+         $tracings->iduser_update=$id;
+         //$tracings->file=$name;
          $tracings->save();
+         Session::flash('message','Ha realizado un nuevo seguimiento del projecto: '.$tracings->project->name);
 
-         if($action=='save_new')
-           {
-             return redirect()->route('tracing.create');
+        //  if($action=='save_new')
 
-           }
-             else {
-                return redirect()->back();
-             }
+        //    {
+          return redirect()->route('admin.projectos.index');
+
+          //  }
+          //    else {
+          //    return redirect()->back();
+          //    }
 
 
-       Session::flash('message','Ha realizado un nuevo seguimiento del projecto: '.$tracings->project->name);
 
        }
 
@@ -340,9 +351,11 @@ class ProjectController extends Controller
          // Brief  - Requirimientos hoja de vida del proyecto
           */
 
+
+
       public function create_brief($id)
           {
-            $proyect=Project::findOrFail($id);
+            $project=Project::findOrFail($id);
 
             return view('projects/briefs/create',compact('project'));
           }
@@ -358,20 +371,23 @@ class ProjectController extends Controller
                 $file->move($path,$name);
             }
             $briefs = new Brief($request->all());
-            $briefs->file->$name;
-            $briefs->iduser_create->$id;
+          //  $briefs->file=$name;
+            $briefs->user_id=$id;
+            $briefs->iduser_update=$id;
             $briefs->save();
-
-            return redirect()->back();
-
             Session::flash('message','Ha ingresado exitosamente el Brief del projecto: '.$briefs->project->name);
+
+            return redirect()->route('admin.projectos.index');
+
 
           }
 
         public function edit_brief($id)
             {
 
+
               $briefs=Brief::findOrFail($id);
+            
               return view('projects/briefs/edit',compact('briefs'));
 
             }

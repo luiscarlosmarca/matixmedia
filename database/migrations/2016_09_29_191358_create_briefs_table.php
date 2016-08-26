@@ -23,8 +23,8 @@ class CreateBriefsTable extends Migration
 
             //** sitio website
             $table->string('website');
-            $table->text('email');//correos corporativos
-            $table->text('details');
+
+            $table->text('details');// todos los demas detalles.
 
             //*** Publicidad
             $table->text('goles');//objetivos
@@ -34,7 +34,7 @@ class CreateBriefsTable extends Migration
             $table->string('promotion');//valor agregado o promocion
             $table->text('adverts');//anuncios de texto
             $table->text('keywords');
-            $table->text('wordneg');//palabras negativas
+        
 
             $table->string('file')->nullable();//imagenes de anuncios display o video
 
@@ -48,8 +48,8 @@ class CreateBriefsTable extends Migration
 
             //****Campos de predeterminados ***///
             $table->text('note');
-            $table->integer('iduser_create')->unsigned();//usuario que crea el registro
-            $table->foreign('iduser_create')// el agente de venta
+            $table->integer('user_id')->unsigned();//usuario que crea el registro
+            $table->foreign('user_id')// el agente de venta
               ->references('id')->on('users')
               ->onUpdate('cascade');
 

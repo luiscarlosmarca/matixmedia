@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateTracingtRequest extends Request
+class CreateTracingRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,11 @@ class CreateTracingtRequest extends Request
     public function rules()
     {
         return [
-                'name'    => 'required|max:255',
+
                 'date'    => 'required|date|date_format:Y-m-d',
                 'state'   => 'required|string',
-                'details'  => 'required|string'
+                'details' => 'required|string'
+
         ];
     }
 }

@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('htmlheader_title')
-    Crear Usuario
+    Registrar seguimiento
 @endsection
 
 
@@ -30,7 +30,7 @@
                     @include('projects.tracings.partials.fields')
 
                     <button type="submit" class="btn btn-primary">
-                    Registrar ingreso
+                    Registrar seguimiento
                     </button>
 
 

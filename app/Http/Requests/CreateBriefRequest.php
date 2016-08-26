@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateBrieftRequest extends Request
+class CreateBriefRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class CreateBrieftRequest extends Request
         return [
             'project_id'=> 'required|exists:projects,id',
             'date'      => 'required|date|date_format:Y-m-d',
-            'file'      =>'required',
+          //  'file'      => 'required',
             'details'   => 'string'
         ];
     }

@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Session;
 class Tracing extends Model
 {
   protected $table = 'tracings';
-  protected $fillable = ['details','date','phase','project_id','state','file','iduser_create','iduser_update','note'];
+  protected $fillable = ['details','date','phase','project_id','state','file','user_id','iduser_update','note'];
 
 //* relaciones
   public function project()
   {
  //Cada seguimiento pertence a un projecto
-    return $this->belongTo('App\Project');
+    return $this->belongsTo('App\Project');
   }
   public function user()
   {

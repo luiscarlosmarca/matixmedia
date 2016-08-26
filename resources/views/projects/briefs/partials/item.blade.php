@@ -33,12 +33,9 @@
                                     <li><a href="{{route('admin.projectos.edit',$project)}}">Actualizar</a></li>
                                     <li><a href="{{route('admin.projecto.ingresos',$project)}}">Ingresos</a></li>
                                     <li><a href="{{route('admin.projecto.seguimientos',$project)}}">Seguimientos</a></li>
-                                    @if($project->briefs=="")
                                     <li><a href="{{route('admin.projecto.add_brief',$project)}}">Crear Brief</a></li>
-                                    @else
-                                    <li><a href="{{route('admin.projecto.editar_brief',$project)}}">Actualizar Brief</a></li>
-                                    @endif
-                                    <li><a href="{{route('admin.projecto.mi_pdf',$project)}}" target="_blank">Ver en pdf</a></li>
+
+                                    <li><a href="{{route('admin.projecto.mi_pdf',$project)}}">Ver en pdf</a></li>
 
                                   </ul>
                                 </div>

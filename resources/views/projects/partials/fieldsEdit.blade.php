@@ -20,10 +20,10 @@
 
 
 					{!! Form::label('dateStart','Fecha de inicio')!!}
-					{!! Form::text('dateStart',null,['class'=>'form-control','placeholder'=>'Escriba  la fecha de inicio'])!!}
+					{!! Form::date('dateStart',null,['class'=>'form-control','placeholder'=>'Escriba  la fecha de inicio'])!!}
 
 					{!! Form::label('dateFinish','Fecha de entrega')!!}
-					{!! Form::text('dateFinish',null,['class'=>'form-control','placeholder'=>'Escriba  la fecha de entrega aproximada'])!!}
+					{!! Form::date('dateFinish',null,['class'=>'form-control','placeholder'=>'Escriba  la fecha de entrega aproximada'])!!}
 
 
           {!! Form::label('note','Nota')!!}

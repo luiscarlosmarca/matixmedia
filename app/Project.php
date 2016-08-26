@@ -70,7 +70,7 @@ class Project extends Model
   public static function filter($name)
   {
       return Project::name($name)
-        ->orderBy('dateFinish','DESC')
+        ->orderBy('dateFinish','ASC')
         ->paginate(5);
   }
 

@@ -135,7 +135,7 @@ Route::group(['middleware'=>'auth'], function(){
         'as'	=>'admin.projecto.update_tracing'
         ]);
 
-        Route::get('/admin/projecto/registrar_brief/{id}',[
+        Route::get('/admin/projecto/registrar_brief/{id}',[//brief
         'uses'	=>'ProjectController@create_brief',
         'as'  	=>'admin.projecto.add_brief'
         ]);
@@ -155,7 +155,10 @@ Route::group(['middleware'=>'auth'], function(){
         'as'	=>'admin.projecto.update_brief'
         ]);
 
-      Route::resource('seguimientos','TracingController');
+    
+
+
+      Route::resource('seguimientos','TracingController');/// Segumientos pero de parte netamente el admin
         Route::get('/admin/seguimientos/pdf/',[
         'uses'	=>'TracingController@pdf',
         'as'	=>'admin.seguimientos.pdf'

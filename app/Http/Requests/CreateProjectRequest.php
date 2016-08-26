@@ -38,7 +38,7 @@ class CreateProjectRequest extends Request
           'developer_id' => 'required|exists:users,id',
          'costumer_id'   => 'required|exists:users,id',
          'file'          =>'required|mimes:zip,rar',
-         'contract'          =>'mimes:pdf,doc'
+         'contract'      =>'mimes:pdf,doc'
         ];
     }
 }
