@@ -24,18 +24,24 @@
 
 
     				<div class="panel-body">
-              {!!Form::open(['route'=>'admin.projecto.store_brief','method'=>'POST'])!!}
-
+              {!!Form::open(['route'=>'admin.projecto.store_brief','method'=>'POST','enctype'=>'multipart/form-data'])!!}
+              {!! Form::hidden('project_id',$project->id)!!}
 
                     @include('projects.briefs.partials.fields')
 
+          					{!! Form::label('file','Archivos del projecto')!!}
+          					{!! Form::file('file',null,['class'=>'form-control'])!!}
+          					<p class="help-block">Maximo 500Mb .rar y .zip.</p>
+
+          			
                     <button type="submit" class="btn btn-primary">
                     Registrar Brief
                     </button>
 
 
-    				</div>
-                {!! Form::close() !!}
+
+              {!! Form::close() !!}
+            </div>
 			</div>
 		</div>
 	</div>

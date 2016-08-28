@@ -12,6 +12,7 @@ use App\User;
 use App\Payment;
 use App\Tracing;
 use App\Brief;
+use Storage;
 use \Input as Input;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\EditProjectRequest;
@@ -303,13 +304,13 @@ class ProjectController extends Controller
              $name = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
 
              Storage::disk('tracings')->put($name,  \File::get($file));
-             dd($name);
+
          }
 
          $tracings = new Tracing($request->all());
          $tracings->user_id=$id;
          $tracings->iduser_update=$id;
-         //$tracings->file=$name;
+         $tracings->file=$name;
          $tracings->save();
          Session::flash('message','Ha realizado un nuevo seguimiento del projecto: '.$tracings->project->name);
 
@@ -371,7 +372,7 @@ class ProjectController extends Controller
                 $file->move($path,$name);
             }
             $briefs = new Brief($request->all());
-          //  $briefs->file=$name;
+            $briefs->file=$name;
             $briefs->user_id=$id;
             $briefs->iduser_update=$id;
             $briefs->save();
@@ -386,14 +387,15 @@ class ProjectController extends Controller
             {
 
 
-              $briefs=Brief::findOrFail($id);
-            
-              return view('projects/briefs/edit',compact('briefs'));
+              $brief=Brief::findOrFail($id);
+
+              return view('projects/briefs/edit',compact('brief'));
 
             }
 
         public function update_brief(EditBriefRequest $request,$id)
             {
+          
               $id_user=Auth::user()->id;
               $briefs=Brief::findOrFail($id);
               $file_old=$briefs->file;
@@ -412,6 +414,6 @@ class ProjectController extends Controller
               $briefs->save();
 
               Session::flash('message',' Se actualizo exitosamente el Brief');
-              return redirect()->back();
+              return redirect()->route('admin.projectos.index');
             }
 }

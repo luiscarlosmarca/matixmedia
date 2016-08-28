@@ -24,10 +24,11 @@
 
 
     				<div class="panel-body">
-              {!!Form::open(['route'=>'admin.projecto.store_tracing','method'=>'POST'])!!}
+              {!!Form::open(['route'=>'admin.projecto.store_tracing','method'=>'POST','enctype'=>'multipart/form-data'])!!}
 
 
                     @include('projects.tracings.partials.fields')
+                  	{!! Form::hidden('project_id',$project->id)!!}
 
                     <button type="submit" class="btn btn-primary">
                     Registrar seguimiento

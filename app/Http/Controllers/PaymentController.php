@@ -22,7 +22,8 @@ class PaymentController extends Controller
      public function index(Request $request)
      { //view for admin, only read: agent and developer,
        $expenses= Expense::whereBetween('created_at',array($request->get('from'),$request->get('to')))->get();
-       $payments= Payment::whereBetween('created_at',array($request->get('from'),$request->get('to')))->get();
+       //$payments= Payment::whereBetween('created_at',array($request->get('from'),$request->get('to')))->get();
+       $payments= Payment::filter($request->get('date'));
              //este filtro de fecha seria bueno transladarlo al modelo.
        $t_payments=$payments->sum('value');
        $t_expenses=$expenses->sum('value');

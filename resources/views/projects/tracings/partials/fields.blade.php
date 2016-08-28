@@ -16,12 +16,12 @@
 
 					{!! Form::label('file','Archivos del seguimiento')!!}
 					{!! Form::file('file',null,['class'=>'form-control'])!!}
-	
+
 
 
         	{!! Form::label('note','Nota')!!}
           {!! Form::textarea('note',null,['class'=>'form-control textarea-content','placeholder'=>'Nota'])!!}
 
-					{!! Form::hidden('project_id',$project->id)!!}
+
 
 				</div>

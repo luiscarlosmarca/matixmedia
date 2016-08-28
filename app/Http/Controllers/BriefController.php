@@ -19,10 +19,10 @@ class BriefController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
       //view for admin, only read: agent and developer,
-        $briefs= Brief::orderBy('date','ASC')->get();
+        $briefs= Brief::filter($request->get('date'));
         return view('briefs/list', compact('briefs'));
       //blog view
     }

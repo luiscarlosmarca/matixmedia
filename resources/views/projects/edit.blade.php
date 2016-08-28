@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('htmlheader_title')
-    Editar  Usuario {{$project->name}}
+    Editar  Projecto {{$project->name}}
 @endsection
 
 
@@ -72,7 +72,7 @@
                          </div>
 
                     </div>
-                      {!!Form::model($project,['route'=>['admin.projectos.update',$project],'method'=>'PUT'])!!}
+                      {!!Form::model($project,['route'=>['admin.projectos.update',$project],'method'=>'PUT','enctype'=>'multipart/form-data'])!!}
 
                       @include('projects.partials.fieldsEdit')
 

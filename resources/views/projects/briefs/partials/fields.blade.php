@@ -1,7 +1,7 @@
 <div class="form-group">
 
-					{!! Form::label('date','date')!!}
-					{!! Form::date('date',null,['class'=>'form-control','placeholder'=>'Escriba el nombre del projecto'])!!}
+					{!! Form::label('date','Fecha')!!}
+					{!! Form::date('date',null,['class'=>'form-control','placeholder'=>'Fecha en la que recibio el brief, por parte del cliente.'])!!}
 
 					{!! Form::label('tender','Propuesta')!!}
 					{!! Form::textarea('tender',null,['class'=>'form-control textarea-content','placeholder'=>'Detalle la propuesta presentada al cliente.'])!!}
@@ -43,12 +43,8 @@
 					{!! Form::textarea('adverts',null,['class'=>'form-control textarea-content','placeholder'=>'ideas para las palabras claves y las palabras negativas'])!!}
 
 
-					{!! Form::label('file','Archivos del projecto')!!}
-					{!! Form::file('file',null,['class'=>'form-control'])!!}
-					<p class="help-block">Maximo 500Mb .rar y .zip.</p>
-
 				  {!! Form::label('note','Nota')!!}
           {!! Form::textarea('note',null,['class'=>'form-control textarea-content','placeholder'=>'Nota'])!!}
-					{!! Form::hidden('project_id',$project->id)!!}
+
 
 				</div>

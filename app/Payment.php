@@ -31,17 +31,17 @@ class Payment extends Model
 
     if (trim($date) != "")
     {
-        $query->where(\DB::raw("CONCAT(date)"),"LIKE","%$date%");
+        $query->where(\DB::raw("CONCAT(created_at)"),"LIKE","%$date%");
         Session::flash('message','Fecha:'.' '.$date.'  ' .'Resultado de la busqueda');
      }
 
   }
 
-  public static function filter()
+  public static function filter($date)
   {
       return Payment::date($date)
         ->orderBy('created_at','DESC')
-        ->paginate(10);
+        ->paginate(5);
   }
 
   public function scopeTotal($query)

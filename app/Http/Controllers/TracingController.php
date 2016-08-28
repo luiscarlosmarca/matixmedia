@@ -19,7 +19,7 @@ class TracingController extends Controller
      */
     public function index(Request $request)
     { //view for admin, only read: agent and developer,
-     $tracings= Tracing::filter($request->get('date'),$request->get('state'));
+     $tracings= Tracing::filter($request->get('date'),$request->get('state'),$request->get('phase'));
 
       return view('tracings/list', compact('tracings'));
     }

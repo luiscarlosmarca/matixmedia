@@ -47,10 +47,22 @@ class Tracing extends Model
 
   }
 
-  public static function filter($date,$state)
+  public function scopePhase($query,$phase)// Buscar por el nombre
+  {
+
+    if (trim($phase) != "")
+    {
+        $query->where(\DB::raw("CONCAT(phase)"),"LIKE","%$phase%");
+        Session::flash('message','Fase:'.' '.$phase.'  ' .'Resultado de la busqueda');
+     }
+
+  }
+
+  public static function filter($date,$state,$phase)
   {
       return Tracing::date($date)
         ->state($state)
+        ->phase($phase)
         ->orderBy('created_at','DESC')
         ->paginate(5);
   }

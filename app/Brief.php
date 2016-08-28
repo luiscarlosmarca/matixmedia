@@ -24,6 +24,25 @@ class Brief extends Model
   }
   //*** metodos
 
+  public function scopeDate($query,$date)// Buscar por el nombre
+  {
+
+    if (trim($date) != "")
+    {
+        $query->where(\DB::raw("CONCAT(date)"),"LIKE","%$date%");
+        Session::flash('message','Fecha:'.' '.$date.'  ' .'Resultado de la busqueda');
+     }
+
+  }
+
+
+  public static function filter($date)
+  {
+      return Brief::date($date)
+        ->orderBy('created_at','DESC')
+        ->paginate(5);
+  }
+
 
 
 }

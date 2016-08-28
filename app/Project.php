@@ -43,7 +43,7 @@ class Project extends Model
     return $this->hasMany('App\Tracing');
   }
 
-  public function briefs()
+  public function brief()
   {
     //Un proyecto puede tener un solo requerimiento o brief como la hoja de vida del proyecto
     return $this->hasOne('App\Brief');
