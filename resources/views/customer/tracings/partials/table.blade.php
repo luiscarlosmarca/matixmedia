@@ -6,9 +6,9 @@
 
                           <th>Estado</th>
                           <th>Fase</th>
-                          <th>Proyecto</th>
+                          <th>Nota</th>
                           <th>Archivos</th>
-
+                          
 
                       </tr>
         </thead>
@@ -19,7 +19,7 @@
                         <td>{!!$tracing->details!!}</td>
                         <td>{{$tracing->state}}</td>
                         <td>{{$tracing->phase}}</td>
-                        <td>{{$tracing->project->name }}</td>
+                        <td>{!!$tracing->note!!}</td>
                         <td>
                           @if($tracing->file!="")
                           <a href="/upload/projects/tracings/{{$tracing->file}}"class="btn btn-default"  target="_blank" class="thumbnail" >

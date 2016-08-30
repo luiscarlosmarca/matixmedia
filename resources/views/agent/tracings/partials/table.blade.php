@@ -13,13 +13,13 @@
                       </tr>
         </thead>
         <tbody>
-                    @foreach ($tracings as $tracing)
+                    @foreach ($user->tracings as $tracing)
                     <tr>
                         <td>{{$tracing->date}}</td>
                         <td>{!!$tracing->details!!}</td>
                         <td>{{$tracing->state}}</td>
                         <td>{{$tracing->phase}}</td>
-                        <td>{{$tracing->project->name }}</td>
+                        <td>{{$tracing->project->name}}</td>
                         <td>
                           @if($tracing->file!="")
                           <a href="/upload/projects/tracings/{{$tracing->file}}"class="btn btn-default"  target="_blank" class="thumbnail" >
@@ -38,5 +38,5 @@
 </table>
 
 
-{!!$tracings->render()!!}
+
         </div>

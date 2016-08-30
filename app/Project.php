@@ -67,7 +67,7 @@ class Project extends Model
 
   }
 
-  
+
 
 
 

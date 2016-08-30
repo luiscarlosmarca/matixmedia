@@ -53,6 +53,117 @@ Route::group(['middleware'=>'auth'], function(){
     ]);
 
 
+        /**
+          //Segundo filtro. role-> agent
+       */
+    Route::group(['middleware'=>'role:agent'], function()
+    {
+        Route::get('agent/projectos/',[//listado de los proyectos de los develper
+        'uses'	=>'ProjectController@index',
+        'as'	  =>'projectos.index'
+        ]);
+
+        Route::get('agent/projectos/crear',[
+        'uses'	=>'ProjectController@create',
+        'as'  	=>'projectos.create'
+        ]);
+
+        Route::post('agent/projectos/crear',[
+        'uses'	=>'ProjectController@store',
+        'as'  	=>'projectos.store'
+        ]);
+
+        Route::get('/agent/projecto/editar/{id}',[
+        'uses'	=>'ProjectController@edit',
+        'as'  	=>'projecto.edit'
+        ]);
+
+        Route::patch('/admin/projecto/editar/{id}',[
+        'uses'	=>'ProjectController@update',
+        'as'	=>'projecto.update'
+        ]);
+
+        Route::get('/projecto/ingresos/{id}',[/// ingresoso
+        'uses'	=>'ProjectController@list_payments',
+        'as'  	=>'projecto.ingresos'
+        ]);
+
+        Route::get('admin/projecto/registrar_ingreso/{id}',[
+        'uses'	=>'ProjectController@create_payment',
+        'as'	  =>'projecto.add_ingresos'
+        ]);
+
+        Route::post('/agent/projecto/registrar_ingreso/',[
+          'uses'=>'ProjectController@store_payment',
+          'as'  =>'projecto.store_ingresos'
+        ]);
+
+        Route::get('/agent/projecto/editar_ingreso/{id}',[
+        'uses'	=>'ProjectController@edit_payment',
+        'as'  	=>'projecto.edit_ingresos'
+        ]);
+
+        Route::patch('/agent/projecto/editar_ingreso/{id}',[
+        'uses'	=>'ProjectController@update_payment',
+        'as'	=>'projecto.update_ingresos'
+        ]);
+
+        Route::get('agent/projecto/seguimientos/',[/// seguimientos
+        'uses'	=>'TracingController@my_tracings',
+        'as'  	=>'seguimientos.index'
+        ]);
+        Route::get('/agent/projecto/registrar_seguimiento/{id}',[
+        'uses'	=>'ProjectController@create_tracing',
+        'as'	  =>'projecto.add_tracing'
+        ]);
+
+        Route::post('/admin/projecto/registrar_seguimiento/',[
+          'uses'=>'ProjectController@store_tracing',
+          'as'  =>'projecto.store_tracing'
+        ]);
+
+        Route::get('/admin/projecto/editar_seguimiento/{id}',[
+        'uses'	=>'ProjectController@edit_tracing',
+        'as'	  =>'projecto.edit_tracing'
+        ]);
+
+        Route::patch('/admin/projecto/editar_seguimiento/{id}',[
+        'uses'	=>'ProjectController@update_tracing',
+        'as'	=>'projecto.update_tracing'
+        ]);
+
+        Route::get('/admin/projecto/registrar_brief/{id}',[//brief
+        'uses'	=>'ProjectController@create_brief',
+        'as'  	=>'projecto.add_brief'
+        ]);
+
+        Route::post('/admin/projecto/registrar_brief/',[
+          'uses'=>'ProjectController@store_brief',
+          'as'  =>'projecto.store_brief'
+        ]);
+
+        Route::get('/admin/projecto/editar_brief/{id}',[
+        'uses'	=>'ProjectController@edit_brief',
+        'as'	  =>'projecto.editar_brief'
+        ]);
+
+        Route::patch('/admin/projecto/editar_brief/{id}',[
+        'uses'	=>'ProjectController@update_brief',
+        'as'	=>'projecto.update_brief'
+        ]);
+
+        Route::get('agent/servicios/',[//listado de los servicios
+        'uses'	=>'ServiceController@index',
+        'as'	  =>'servicios.index'
+        ]);
+
+        Route::get('agent/servicios/pdf',[//generar portafolio
+        'uses'	=>'ServiceController@pdf',
+        'as'	  =>'servicios.pdf'
+        ]);
+
+
+    });
 
 
       /**
@@ -74,8 +185,7 @@ Route::group(['middleware'=>'auth'], function(){
         'as'	=>'admin.usuarios.pdf'
         ]);
 
-
-      Route::resource('projectos','ProjectController');
+        Route::resource('projectos','ProjectController');
 
         Route::get('/admin/projectos/pdf/',[//listado de los proyectos mas recientes
         'uses'	=>'ProjectController@pdf',
@@ -202,9 +312,8 @@ Route::group(['middleware'=>'auth'], function(){
         ]);
 
 
-
-
     });
+
 
 
 

@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tracing;
 use Barryvdh\DomPDF\Facade as PDF;
-
+use App\User;
 use Illuminate\Support\Facades\Auth;
 class TracingController extends Controller
 {
@@ -40,7 +40,19 @@ class TracingController extends Controller
     {//
       $id=Auth::user()->id;
       $user=User::findOrFail($id);
-      return view('tracings/miTracings', compact('user'));
+      $role=Auth::user()->role;
+
+      if ($role=='developer'|| $role=='agent')
+      {
+        return view('agent/tracings/list', compact('user'));
+
+      }elseif ($role=='admin')
+       {
+      return view('tracings/list', compact('user'));
+       }
+
+
+
       //envio el usuario a la vista, en la vista realizo un ciclo para recoger todos los briefs que tiene este usuario
 
 

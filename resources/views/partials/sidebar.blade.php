@@ -50,28 +50,28 @@
                 </li>
               @endif
                     <!-- /.Projectos -->
-                @if(Auth::user()->agent()||Auth::user()->admin())
+                @if(Auth::user()->admin())
                   <li class="treeview">
                       <a href="#"><i class='fa fa-fire'></i> <span>Projectos</span> <i class="fa fa-angle-left pull-right"></i></a>
                       <ul class="treeview-menu">
-                        @if(Auth::user()->admin())
+
 
                           <li><a href="{{route('admin.projectos.index')}}">Listado</a></li>
                           <li><a href="{{route('admin.projectos.pdf')}}"target="_blank">Generar informes</a></li>
-                        @endif
-
 
                           <li><a href="{{route('admin.projectos.create')}}">Crear un nuevo proyecto</a></li>
-
-
                       </ul>
                   </li>
                 @endif
-                @if(Auth::user()->developer()|| Auth::user()->customer()||Auth::user()->agent()||Auth::user()->admin())
+                @if(Auth::user()->developer()|| Auth::user()->customer()||Auth::user()->agent())
                   <li class="treeview">
-                      <a href="{{route('admin.projectos.index')}}">
+                      <a href="#">
                         <i class='fa fa-fire'></i> <span>Mis Proyectos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                          <li><a href="{{route('projectos.index')}}">Listado</a></li>
 
+                          <li><a href="{{route('projectos.create')}}">Crear un nuevo proyecto</a></li>
+                        </ul>
                   </li>
                 @endif
               @if(Auth::user()->admin())
@@ -88,9 +88,10 @@
                  </ul>
               </li>
               @endif
+
               @if(Auth::user()->developer()|| Auth::user()->customer()||Auth::user()->agent())
               <li class="treeview">
-                <a href="{{route('admin.seguimientos.index')}}">
+                <a href="{{route('seguimientos.index')}}">
                 <i class='fa fa-wrench'></i> <span>Mis Segumientos</span> <i class="fa fa-angle-left pull-right"></i></a>
 
               </li>
@@ -109,12 +110,12 @@
               </li>
               @endif
 
-              @if(Auth::user()->developer()|| Auth::user()->customer()||Auth::user()->agent())
+              <!-- @if(Auth::user()->developer()|| Auth::user()->customer()||Auth::user()->agent())
               <li class="treeview">
-                  <a href="#"><i class='fa fa-list-alt'></i> <span>Mis Brief</span> <i class="fa fa-angle-left pull-right"></i></a>
-
+                  <a href="{{route('admin.briefs.index')}}"><i class='fa fa-list-alt'></i> <span>Mis Brief</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <--Para ver el listado de todos los brief->///*****
               </li>
-              @endif
+              @endif -->
 
             @if(Auth::user()->admin())
               <!-- /.Pagos  | ingresos-->
@@ -129,13 +130,13 @@
               </li>
             @endif
 
-              @if(Auth::user()->agent())
+              <!-- @if(Auth::user()->agent())
               <li class="treeview">
                   <a href="{{route('admin.ingresos.index')}}">
                     <i class='fa fa-list-alt'></i> <span>Ingresos Reportados</span> <i class="fa fa-angle-left pull-right"></i></a>
-
+// Para ver el listado de todos los ingresos, para despues por el momento desde projecto puede ver cada ingreso
               </li>
-              @endif
+              @endif -->
 
                   <!-- /.Salidas gastos -->
               @if(Auth::user()->admin())
@@ -164,23 +165,33 @@
                     </ul>
               </li>
               @endif
-
+  <!-- /      .Servicios -->
               @if(Auth::user()->developer()||Auth::user()->agent()||Auth::user()->admin())
-                <!-- /.Servicios -->
+              <li class="treeview">
+                  <a href="#"><i class='fa fa-th-large'></i> <span>Servicios</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">
+
+                    <li><a href="{{route('servicios.index')}}">Listado</a></li>
+                    <li><a href="{{route('servicios.pdf')}}">Generar Portafolio</a></li>
+
+                  </ul>
+              </li>
+              @endif
+                @if(Auth::user()->admin())
                 <li class="treeview">
                     <a href="#"><i class='fa fa-th-large'></i> <span>Servicios</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                      @if(Auth::user()->admin())
+
 
                         <li><a href="{{route('admin.servicios.create')}}">Crear </a></li>
-                      @endif
+
 
                           <li><a href="{{route('admin.servicios.index')}}">Listado</a></li>
                           <li><a href="{{route('admin.servicios.index')}}">Generar Portafolio</a></li>
 
                     </ul>
                 </li>
-              @endif
+            @endif
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Session;
 use Barryvdh\DomPDF\Facade as PDF;
 
 use Illuminate\Support\Facades\Auth;
+
 class ProjectController extends Controller
 {
     /**
@@ -35,8 +36,31 @@ class ProjectController extends Controller
      */
     public function index(Request $request)// Muestra todos los projectos only admin
     {
-      $projects= Project::filter($request->get('name'));
-      return view('projects/list', compact('projects'));
+      $id=Auth::user()->id;
+      $role=Auth::user()->role;
+      if ($role=='developer')
+      {
+      //  $projects=\DB::table('projects')->where('developer_id', '=', $id)->get();
+         $projects=Project::where('developer_id', $id)->get();
+
+        return view('agent/projects/list', compact('projects'));
+
+      }elseif ($role=='agent')
+       {
+          $projects=Project::where('agent_id', $id)->get();
+          return view('agent/projects/list', compact('projects'));
+
+       }elseif ($role=='customer')
+       {
+         $projects=Project::where('agent_id', '$id')->filter($request->get('name'));
+       }
+       elseif ($role=='admin')
+       {
+         $projects= Project::filter($request->get('name'));
+         return view('projects/list', compact('projects'));
+       }
+
+
     }
 
     public function mi_pdf($id)
@@ -90,10 +114,21 @@ class ProjectController extends Controller
     public function create()
     {
 
-        $costumers=User::orderBy('name','ASC')->where('role', 'costumer')->lists('name','id');
+
+        $costumers=User::orderBy('name','ASC')->where('role', 'customer')->lists('name','id');
         $developers=User::orderBy('name','ASC')->where('role', 'developer')->lists('name','id');
         $services=Service::orderBy('name','ASC')->lists('name','id');
-        return view('projects/create',compact('agents', 'costumers','developers','services'));
+
+        $role=Auth::user()->role;
+        if ($role=='developer'|| $role=='agent')
+        {
+          return view('agent/projects/create',compact('agents', 'costumers','developers','services'));
+
+        }elseif ($role=='admin')
+         {
+           return view('projects/create',compact('agents', 'costumers','developers','services'));  return redirect()->route('admin.projectos.index');
+         }
+
 
     }
 
@@ -131,10 +166,19 @@ class ProjectController extends Controller
 
         Session::flash('message',$projects->name.'  Fue creado exitosamente');
 
+        $role=Auth::user()->role;
+        if ($role=='developer'|| $role=='agent')
+        {
+          return redirect()->route('projectos.index');
+        }elseif ($role=='admin')
+         {
+        return redirect()->route('admin.projectos.index');
+         }
+
 
         //  if($action=='save_new')
         //  {
-          return redirect()->route('admin.projectos.index');
+
          //
         //  }
         //    else {
@@ -142,7 +186,7 @@ class ProjectController extends Controller
         //   }
 
 
-         Session::flash('message',$projects->name.'  Fue creado');
+
 
     }
 
@@ -168,7 +212,19 @@ class ProjectController extends Controller
         $developers=User::orderBy('name','ASC')->where('role', 'developer')->lists('name','id');
         $services=Service::orderBy('name','ASC')->lists('name','id');
         $project=Project::findOrFail($id);
-        return view('projects/edit',compact('project','developers','services'));
+
+        $role=Auth::user()->role;
+        if ($role=='developer'|| $role=='agent')
+        {
+
+          return view('agent/projects/edit',compact('project','developers','services'));
+
+        }elseif ($role=='admin')
+         {
+           return view('projects/edit',compact('project','developers','services'));
+         }
+
+
     }
 
     /**
@@ -209,7 +265,19 @@ class ProjectController extends Controller
       $projects->save();
 
       Session::flash('message',$projects->name.' Se actualizo');
+      $role=Auth::user()->role;
+
+      if ($role=='developer'|| $role=='agent')
+      {
+        return redirect()->route('projectos.index');
+
+      }elseif ($role=='admin')
+       {
       return redirect()->route('admin.projectos.index');
+       }
+
+
+
     }
 
     /**
@@ -288,8 +356,19 @@ class ProjectController extends Controller
     public function create_tracing($id)
        {
          $project=Project::findOrFail($id);
+         $role=Auth::user()->role;
+         if ($role=='developer'|| $role=='agent')
+         {
 
-         return view('projects/tracings/create',compact('project'));
+          return view('agent/projects/tracings/create',compact('project'));
+         }elseif ($role=='admin')
+          {
+        return view('projects/tracings/create',compact('project'));
+          }
+
+
+
+
        }
 
     public function store_tracing(CreateTracingRequest $request)
@@ -314,10 +393,21 @@ class ProjectController extends Controller
          $tracings->save();
          Session::flash('message','Ha realizado un nuevo seguimiento del projecto: '.$tracings->project->name);
 
+         $role=Auth::user()->role;
+         if ($role=='developer'|| $role=='agent')
+         {
+
+
+          return redirect()->route('projectos.index');
+         }elseif ($role=='admin')
+          {
+            return redirect()->route('admin.projectos.index');
+          }
+
         //  if($action=='save_new')
 
         //    {
-          return redirect()->route('admin.projectos.index');
+        //  return redirect()->route('admin.projectos.index');
 
           //  }
           //    else {
@@ -357,8 +447,18 @@ class ProjectController extends Controller
       public function create_brief($id)
           {
             $project=Project::findOrFail($id);
+            $role=Auth::user()->role;
+            if ($role=='developer'|| $role=='agent')
+            {
 
-            return view('projects/briefs/create',compact('project'));
+             return view('agent/projects/briefs/create',compact('project'));
+
+            }elseif ($role=='admin')
+             {
+                return view('projects/briefs/create',compact('project'));
+             }
+
+
           }
 
        public function store_brief(CreateBriefRequest $request)
@@ -378,7 +478,16 @@ class ProjectController extends Controller
             $briefs->save();
             Session::flash('message','Ha ingresado exitosamente el Brief del projecto: '.$briefs->project->name);
 
-            return redirect()->route('admin.projectos.index');
+            $role=Auth::user()->role;
+            if ($role=='developer'|| $role=='agent')
+            {
+
+             return redirect()->route('projectos.index');
+            }elseif ($role=='admin')
+             {
+                  return redirect()->route('admin.projectos.index');
+             }
+
 
 
           }
@@ -395,7 +504,7 @@ class ProjectController extends Controller
 
         public function update_brief(EditBriefRequest $request,$id)
             {
-          
+
               $id_user=Auth::user()->id;
               $briefs=Brief::findOrFail($id);
               $file_old=$briefs->file;
