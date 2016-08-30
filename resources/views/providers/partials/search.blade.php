@@ -2,17 +2,17 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 
-		{!!Form::model(Request::all(),['route'=>'admin.briefs.index','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
+		{!!Form::model(Request::all(),['route'=>'admin.proveedores.index','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
 
 
-						<div class="form-group">
+						    {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre de la entidad'])!!}
 
-						    {!!Form::date('date',null,['class'=>'form-control','placeholder'=>'Fecha del seguimiento'])!!}
+								{!! Form::select('category',config('category.category'), null, ['class'=>'form-control']) !!}
+								{!!Form::text('contact',null,['class'=>'form-control','placeholder'=>'Contacto del proveedor'])!!}
+  <button type="submit" class="btn btn-default">Buscar!!</button>
 
-
-								
 		 			 	 </div>
-						  <button type="submit" class="btn btn-default">Buscar!!</button>
+
 
 
 		{!!Form::close()!!}

@@ -1,38 +1,42 @@
 <table class="table">
         <thead>
                       <tr>
-                          <th>Fecha</th>
-                          <th>Cliente</th>
 
-                          <th>Proyecto</th>
-                          <th>Agente</th>
+                          <th>Nombre</th>
 
-                          <th>Archivos</th>
+                          <th>Telefono</th>
+                          <th>Email</th>
+
+                          <th>Contacto</th>
+                          <th>Categoria</th>
                           <th>Acciones</th>
 
                       </tr>
         </thead>
         <tbody>
-                    @foreach ($briefs as $brief)
+                    @foreach ($providers as $provider)
                     <tr>
-                        <td>{{$brief->date}}</td>
-                        <td>{{$brief->project->costumer->name}}</td>
-                        <td>{{$brief->project->name}}</td>
-                        <td>{{$brief->project->agent->name}}</td>
+                        <td>{{$provider->name}}</td>
+                        <td>{{$provider->phone}}</td>
+                        <td>{{$provider->email}}</td>
+                        <td>{{$provider->category}}</td>
+                        <td>{{$provider->contact}}</td>
+
 
                         <td>
-                          @if($brief->file!="")
-                          <a href="/upload/projects/briefs/{{$brief->file}}"class="btn btn-default"  target="_blank" class="thumbnail" >
-                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>  Descargar Archivos
-                          </a>
-                          @endif
+                          <div class="btn-group">
+                                    <button type="button" class="btn btn-danger">Accion</button>
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <span class="caret"></span>
+                                      <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li><a href="{{route('admin.proveedores.edit',$provider)}}">Actualizar</a></li>
+                                      <li><a href="{{route('admin.proveedores.add_expense',$provider)}}">Registrar Salida</a></li>
 
-                        </a>
-                        </td>
-                        <td>
-                          <a href="#"class="btn btn-default"  target="_blank" class="thumbnail" >
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>  Actualizar
-                          </a>
+
+                                    </ul>
+                                  </div>
                         </td>
 
 
@@ -43,5 +47,5 @@
 </table>
 
 
-{!!$briefs->render()!!}
+{!!$providers->render()!!}
         </div>

@@ -21,14 +21,20 @@ class PaymentController extends Controller
      */
      public function index(Request $request)
      { //view for admin, only read: agent and developer,
-       $expenses= Expense::whereBetween('created_at',array($request->get('from'),$request->get('to')))->get();
+       //$expenses= Expense::whereBetween('created_at',array($request->get('from'),$request->get('to')))->get();
        //$payments= Payment::whereBetween('created_at',array($request->get('from'),$request->get('to')))->get();
+
+       $expenses= Expense::orderBy('created_at','DESC');
+       $payments_= Payment::orderBy('created_at','DESC');
+
        $payments= Payment::filter($request->get('date'));
              //este filtro de fecha seria bueno transladarlo al modelo.
-       $t_payments=$payments->sum('value');
-       $t_expenses=$expenses->sum('value');
-       $total=$t_payments-$t_expenses;
-       return view('payments/list', compact('payments','t_payments','t_expenses','total'));
+       $t_payments=$payments_->sum('value');// total de todos los ingresos
+       $d_payments=$payments->sum('value');// el total de rango
+       $t_expenses=$expenses->sum('value');//total de los gastos
+
+       $total=$t_payments-$t_expenses;//total de caja
+       return view('payments/list', compact('payments','t_payments','t_expenses','total','d_payments'));
      }
 
      public function pdf(Request $request)

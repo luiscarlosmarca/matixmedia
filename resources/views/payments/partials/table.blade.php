@@ -23,20 +23,30 @@
                         <td>{{$payment->value}}</td>
                         <td>{{$payment->type}}</td>
 
-                        <td>
-
-
-                        </a>
-                        </td>
-
-
-
                     </tr>
                     @endforeach
+                    <td><h3>Total:</h3></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td> <h3>${{ $d_payments}} </h3></td>
+                    <td></td>
+
 
           </tbody>
 </table>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <h3>	</h3>
 
+
+
+
+  </div>
+
+  </div>
+</div>
 
 {!!$payments->render()!!}
         </div>

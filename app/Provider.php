@@ -55,7 +55,7 @@ class Provider extends Model
 
   public static function filter($name,$contact,$category)
   {
-      return Service::name($name)
+      return Provider::name($name)
         ->contact($contact)
         ->category($category)
         ->orderBy('created_at','DESC')

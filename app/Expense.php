@@ -9,19 +9,19 @@ use Illuminate\Support\Facades\Session;
 class Expense extends Model
 {
   protected $table = 'expenses';
-  protected $fillable = ['date','value','type','provider_id','iduser_create','iduser_update','note'];
+  protected $fillable = ['date','value','type','provider_id','user_id','iduser_update','note'];
 
 ////** relaciones
   public function provider()
   {
    //Cada salidad es para una entidad o proveedor.
-   return $this->belongTo('App\Provider');
+   return $this->belongsTo('App\Provider');
   }
 
   public function user()
   {
    //Cada pago es registrado y actualizado por un usuario
-   return $this->belongTo('App\User');
+   return $this->belongsTo('App\User');
   }
 
 
@@ -42,8 +42,11 @@ class Expense extends Model
   {
       return Expense::date($date)
         ->orderBy('created_at','DESC')
-        ->paginate(10);
+        ->paginate(15);
   }
+
+
+
 
   public function scopeTotal($query)
   {

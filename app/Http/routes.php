@@ -185,6 +185,16 @@ Route::group(['middleware'=>'auth'], function(){
         'uses'	=>'ProviderController@pdf',
         'as'	=>'admin.proveedores.pdf'
         ]);
+        Route::get('proveedores/registrar_salidas/{id}',[//crear gastos o salidas
+        'uses'	=>'ProviderController@create_expense',
+        'as'  	=>'admin.proveedores.add_expense'
+        ]);
+
+        Route::post('/proveedores/registrar_salidas/',[
+          'uses'=>'ProviderController@store_expense',
+          'as'  =>'admin.proveedores.store_expense'
+        ]);
+
       Route::resource('servicios','ServiceController');
         Route::get('/admin/servicios/pdf/',[
         'uses'	=>'ServiceController@pdf',

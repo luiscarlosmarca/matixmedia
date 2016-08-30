@@ -41,7 +41,7 @@ class Payment extends Model
   {
       return Payment::date($date)
         ->orderBy('created_at','DESC')
-        ->paginate(5);
+        ->paginate(15);
   }
 
   public function scopeTotal($query)

@@ -10,7 +10,7 @@ use App\Service;
 use App\Http\Requests\CreateServiceRequest;
 use App\Http\Requests\EditServiceRequest;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -44,20 +44,21 @@ class ServiceController extends Controller
      {
        $id=Auth::user()->id;
        $services = new Service($request->all());
-       $services->iduser_create->$id;
+       $services->iduser_create=$id;
        $services->save();
 
-       if($action=='save_new')
-       {
-         return redirect()->route('service.create');
-
-       }
-         else {
-            return redirect()->back();
-         }
-
-
        Session::flash('message','El servicio: '.$services->name.' se creo exitosamente');
+      //  if($action=='save_new')
+      //  {
+         return redirect()->route('admin.servicios.index');
+
+      //  }
+      //    else {
+      //       return redirect()->back();
+      //    }
+
+
+
 
      }
 

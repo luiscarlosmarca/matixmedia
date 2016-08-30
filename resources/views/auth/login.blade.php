@@ -1,7 +1,7 @@
 @extends('auth.auth')
 
 @section('htmlheader_title')
-  Iniciar sesión
+Su información es nuestro tesoro.
 @endsection
 
 @section('content')
@@ -48,11 +48,16 @@
         </div>
     </form>
 
-    <div class="social-auth-links text-center">
+    <!-- <div class="social-auth-links text-center">
         <p>- ó -</p>
         <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
         <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
-    </div><!-- /.social-auth-links -->
+    </div><!-- /.social-auth-links --> -->
+    <div class="social-auth-links text-center">
+        <p>- Visita nuestro sitio web -</p>
+        <a href="http://Matixmedia.com.co"  class="btn btn-block btn-social btn-google-plus btn-flat" target="_blank"><i class="fa fa-cloud"></i> Matix Web Desarrollo de apliaciones web</a>
+        <p> Su información es nuestro tesoro </p> <p> Protección de datos: Ley habeas data<p>
+    </div><!-- /.social-auth-links --> -->
 
     <a href="{{ url('/password/email') }}">Olvide mi contraseña</a><br>
   <!--  <a href="{{ url('/auth/register') }}" class="text-center">Crear una cuenta</a>

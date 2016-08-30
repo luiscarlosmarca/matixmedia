@@ -12,7 +12,7 @@ use App\Http\Requests\CreateProviderRequest;
 use App\Http\Requests\EditProviderRequest;
 use App\Http\Requests\CreateExpenseRequest;
 use Barryvdh\DomPDF\Facade as PDF;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 class ProviderController extends Controller
 {
@@ -36,29 +36,25 @@ class ProviderController extends Controller
     }
     public function create()
     {
-      $id=Auth::user()->id;
-      return view('providers/create',compact('id'));
-      //envio del id del usuario por el controllador, para colcoar en el hidden.
-    }
+      return view('providers/create');
 
+    }
     public function store(CreateProviderRequest $request)
     {
       $id=Auth::user()->id;
       $providers = new Provider($request->all());
-      $providers->iduser_create->$id;
+      $providers->iduser_create=$id;
       $providers->save();
-
-      if($action=='save_new')
-      {
-        return redirect()->route('provider.create');
-
-      }
-        else {
-           return redirect()->back();
-        }
-
-
       Session::flash('message','El proveedor: '.$providers->name.' se creo exitosamente');
+      //
+      // if($action=='save_new')
+      // {
+        return redirect()->route('admin.proveedores.index');
+
+      // }
+      //   else {
+      //      return redirect()->back();
+      //   }
 
     }
 
@@ -87,26 +83,27 @@ class ProviderController extends Controller
      */
     public function create_expense($id)
       {
+
         $provider=Provider::findOrFail($id);
 
-        return view('expenses/create',compact('provider'));
+        return view('providers/expenses/create',compact('provider'));
       }
 
       public function store_expense(CreateExpenseRequest $request)
       {
         $id=Auth::user()->id;
         $expenses = new Expense($request->all());
-        $expenses->iduser_create->$id;
+        $expenses->user_id=$id;
         $expenses->save();
 
-        if($action=='save_new')
-        {
-          return redirect()->route('expense.create','id');
+        // if($action=='save_new')
+        // {
+          return redirect()->route('admin.salidas.index');
 
-        }
-          else {
-             return redirect()->back();
-          }
+        // }
+        //   else {
+        //      return redirect()->back();
+        //   }
 
 
         Session::flash('message','El proveedor: '.$expenses->provider->name.' realizo una salidad $$');
