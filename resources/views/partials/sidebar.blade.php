@@ -63,7 +63,7 @@
                       </ul>
                   </li>
                 @endif
-                @if(Auth::user()->developer()|| Auth::user()->customer()||Auth::user()->agent())
+                @if(Auth::user()->agent())
                   <li class="treeview">
                       <a href="#">
                         <i class='fa fa-fire'></i> <span>Mis Proyectos</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -72,6 +72,15 @@
 
                           <li><a href="{{route('projectos.create')}}">Crear un nuevo proyecto</a></li>
                         </ul>
+                  </li>
+                @endif
+
+
+                @if(Auth::user()->developer()|| Auth::user()->customer())
+                  <li class="treeview">
+                      <a href="{{route('projectos.index')}}">
+                        <i class='fa fa-fire'></i> <span>Mis Proyectos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        
                   </li>
                 @endif
               @if(Auth::user()->admin())

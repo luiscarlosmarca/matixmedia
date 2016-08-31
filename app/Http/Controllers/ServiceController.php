@@ -22,6 +22,7 @@ class ServiceController extends Controller
      public function index(Request $request)
      { //view for admin, agent and developer
        $services= Service::filter($request->get('name'));
+      
        return view('services/list', compact('services'));
      }
 

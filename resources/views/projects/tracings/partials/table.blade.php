@@ -6,6 +6,8 @@
 
                           <th>Estado</th>
                           <th>Fase</th>
+
+                          <th>Registrado por:</th>
                           <th>Nota</th>
                           <th>Archivos</th>
 
@@ -18,6 +20,7 @@
                         <td>{!!$tracing->details!!}</td>
                         <td>{{$tracing->state}}</td>
                         <td>{{$tracing->phase}}</td>
+                        <td>{{$tracing->user->name}}</td>
                         <td>{!!$tracing->note!!}</td>
                         <td>
                           @if($tracing->file!="")

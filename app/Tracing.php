@@ -20,7 +20,7 @@ class Tracing extends Model
   public function user()
   {
    //un usuario crea este registro
-   return $this->belongTo('App\User');
+   return $this->belongsTo('App\User');
   }
 
   //* metodos ***************
@@ -63,7 +63,7 @@ class Tracing extends Model
       return Tracing::date($date)
         ->state($state)
         ->phase($phase)
-        ->orderBy('created_at','DESC')
+        ->orderBy('created_at','ASC')
         ->paginate(5);
   }
 }

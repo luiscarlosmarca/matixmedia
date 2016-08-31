@@ -287,14 +287,35 @@ class ProjectController extends Controller
     public function list_payments($id)//listar ingresos de cada proyecto para no hacer la vista de
     // proyectos muy larga.
     {
+      $role=Auth::user()->role;
       $project=Project::findOrFail($id);
-      return view('projects/payments/list',compact('project'));
+      if ($role=='developer'|| $role=='agent')
+      {
+
+        return view('agent/projects/payments/list',compact('project'));
+
+      }elseif ($role=='admin')
+       {
+         return view('projects/payments/list',compact('project'));
+       }
+
+
+
     }
     public function create_payment($id)
       {
+        $role=Auth::user()->role;
         $project=Project::findOrFail($id);
+        if ($role=='developer'|| $role=='agent')
+        {
 
-        return view('projects/payments/create',compact('project'));
+        return view('agent/projects/payments/create',compact('project'));
+
+        }elseif ($role=='admin')
+         {
+           return view('projects/payments/create',compact('project'));
+
+         }
       }
 
       public function store_payment(CreatePaymentRequest $request)
@@ -308,9 +329,21 @@ class ProjectController extends Controller
         $payments->save();
         Session::flash('message','El projecto: '.$payments->project->name.' realizo un ingreso');
 
+        $role=Auth::user()->role;
+        if ($role=='developer'|| $role=='agent')
+        {
+
+          return redirect()->route('projectos.index');
+
+        }elseif ($role=='admin')
+         {
+
+          return redirect()->route('admin.projectos.index');
+
+         }
         // if($action=='save_new')
         // {
-          return redirect()->route('admin.projectos.index');
+          // return redirect()->route('admin.projectos.index');
         //
         // }
         //   else {
@@ -375,7 +408,7 @@ class ProjectController extends Controller
        {
 
          $id=Auth::user()->id;
-
+         $tracings = new Tracing($request->all());
          if($request->file('file'))
          {
            // nose porque no entra a este ciclo y no tomar el archivo.pro
@@ -383,13 +416,14 @@ class ProjectController extends Controller
              $name = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
 
              Storage::disk('tracings')->put($name,  \File::get($file));
+             $tracings->file=$name;
 
          }
 
-         $tracings = new Tracing($request->all());
+
          $tracings->user_id=$id;
          $tracings->iduser_update=$id;
-         $tracings->file=$name;
+
          $tracings->save();
          Session::flash('message','Ha realizado un nuevo seguimiento del projecto: '.$tracings->project->name);
 
@@ -441,16 +475,13 @@ class ProjectController extends Controller
          /**
          // Brief  - Requirimientos hoja de vida del proyecto
           */
-
-
-
       public function create_brief($id)
           {
             $project=Project::findOrFail($id);
             $role=Auth::user()->role;
+
             if ($role=='developer'|| $role=='agent')
             {
-
              return view('agent/projects/briefs/create',compact('project'));
 
             }elseif ($role=='admin')
@@ -479,10 +510,11 @@ class ProjectController extends Controller
             Session::flash('message','Ha ingresado exitosamente el Brief del projecto: '.$briefs->project->name);
 
             $role=Auth::user()->role;
+
             if ($role=='developer'|| $role=='agent')
             {
-
              return redirect()->route('projectos.index');
+
             }elseif ($role=='admin')
              {
                   return redirect()->route('admin.projectos.index');
@@ -494,11 +526,19 @@ class ProjectController extends Controller
 
         public function edit_brief($id)
             {
-
-
               $brief=Brief::findOrFail($id);
+              $role=Auth::user()->role;
 
-              return view('projects/briefs/edit',compact('brief'));
+              if ($role=='developer'|| $role=='agent')
+              {
+
+              return view('agent/projects/briefs/edit',compact('brief'));
+
+              }elseif ($role=='admin')
+               {
+                return view('projects/briefs/edit',compact('brief'));
+               }
+
 
             }
 
@@ -514,15 +554,25 @@ class ProjectController extends Controller
                   $name = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
                   $path = public_path().'/upload/projects/briefs/';
                   $file->move($path,$name);
-
                   Storage::delete($path . $file_old);
               }
-              $briefs->iduser_update->$id_user;
-              $briefs->file->$name;
+              $briefs->iduser_update=$id_user;
+              // $briefs->file->$name;
               $briefs->fill($request->all());
+
               $briefs->save();
 
-              Session::flash('message',' Se actualizo exitosamente el Brief');
-              return redirect()->route('admin.projectos.index');
+              Session::flash('message',' Se actualizo exitosamente el Brief del proyecto '.$briefs->project->name);
+              $role=Auth::user()->role;
+
+              if ($role=='developer'|| $role=='agent')
+              {
+               return redirect()->route('projectos.index');
+
+              }elseif ($role=='admin')
+               {
+                return redirect()->route('admin.projectos.index');
+               }
+
             }
 }

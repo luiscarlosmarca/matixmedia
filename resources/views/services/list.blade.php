@@ -15,29 +15,33 @@ Listado de nuestros servicios
       @endif
       <div class="row">
         <div class="col-md-10 col-md-offset-1" >
-      	<div class="panel panel-primary">
+	      	<div class="panel panel-primary">
 
-            <div class="panel-heading">
-                    <h3>Listado de nuestros servicios</h3>
+	            <div class="panel-heading">
+	                    <h3>Listado de nuestros servicios</h3>
 
-              </div>
+	              </div>
 
-                    <div class="panel-body">
+	                    <div class="panel-body">
 
-                      <p>
-                    @include('services/partials/search')
-                      </p>
+		                      <p>
+												@if(Auth::user()->admin())
+		                    @include('services/partials/search')
+												@endif
+		                      </p>
 
-                        <div class="table-responsive">
+		                        <div class="table-responsive">
 
-                                    @include('services.partials.table')
+		                                    @include('services.partials.table')
 
-                        </div>
-                                <!-- /.panel-body -->
+		                        </div>
+		                                <!-- /.panel-body -->
 
+											</div>
+	  			</div>
+
+			</div>
 		</div>
-  </div>
 </div>
-	</div>
-</div>
+
 @endsection

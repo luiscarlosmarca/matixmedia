@@ -52,26 +52,29 @@ Route::group(['middleware'=>'auth'], function(){
       'as'  =>'perfil.update'
     ]);
 
+    /**
+    //Segundo filtro. role-> costumer
+     */
+     Route::group(['middleware'=>'role:customer'], function()
+     {
 
+     });
         /**
-          //Segundo filtro. role-> agent
+          //Segundo filtro. role-> developer, todo lo que haga el developer lo hace el agente
        */
-    Route::group(['middleware'=>'role:agent'], function()
+    Route::group(['middleware'=>'role:developer'], function()
     {
-        Route::get('agent/projectos/',[//listado de los proyectos de los develper
-        'uses'	=>'ProjectController@index',
-        'as'	  =>'projectos.index'
-        ]);
 
-        Route::get('agent/projectos/crear',[
-        'uses'	=>'ProjectController@create',
-        'as'  	=>'projectos.create'
-        ]);
+      Route::get('agent/projectos/',[//listado de los proyectos de los develper
+      'uses'	=>'ProjectController@index',
+      'as'	  =>'projectos.index'
+      ]);
 
-        Route::post('agent/projectos/crear',[
-        'uses'	=>'ProjectController@store',
-        'as'  	=>'projectos.store'
-        ]);
+      Route::get('agent/projecto/seguimientos/',[/// seguimientos
+      'uses'	=>'TracingController@my_tracings',
+      'as'  	=>'seguimientos.index'
+      
+      ]);
 
         Route::get('/agent/projecto/editar/{id}',[
         'uses'	=>'ProjectController@edit',
@@ -83,35 +86,7 @@ Route::group(['middleware'=>'auth'], function(){
         'as'	=>'projecto.update'
         ]);
 
-        Route::get('/projecto/ingresos/{id}',[/// ingresoso
-        'uses'	=>'ProjectController@list_payments',
-        'as'  	=>'projecto.ingresos'
-        ]);
 
-        Route::get('admin/projecto/registrar_ingreso/{id}',[
-        'uses'	=>'ProjectController@create_payment',
-        'as'	  =>'projecto.add_ingresos'
-        ]);
-
-        Route::post('/agent/projecto/registrar_ingreso/',[
-          'uses'=>'ProjectController@store_payment',
-          'as'  =>'projecto.store_ingresos'
-        ]);
-
-        Route::get('/agent/projecto/editar_ingreso/{id}',[
-        'uses'	=>'ProjectController@edit_payment',
-        'as'  	=>'projecto.edit_ingresos'
-        ]);
-
-        Route::patch('/agent/projecto/editar_ingreso/{id}',[
-        'uses'	=>'ProjectController@update_payment',
-        'as'	=>'projecto.update_ingresos'
-        ]);
-
-        Route::get('agent/projecto/seguimientos/',[/// seguimientos
-        'uses'	=>'TracingController@my_tracings',
-        'as'  	=>'seguimientos.index'
-        ]);
         Route::get('/agent/projecto/registrar_seguimiento/{id}',[
         'uses'	=>'ProjectController@create_tracing',
         'as'	  =>'projecto.add_tracing'
@@ -122,32 +97,32 @@ Route::group(['middleware'=>'auth'], function(){
           'as'  =>'projecto.store_tracing'
         ]);
 
-        Route::get('/admin/projecto/editar_seguimiento/{id}',[
+        Route::get('/admin/projecto/editar_seguimiento/{id}',[//falta desarrollar
         'uses'	=>'ProjectController@edit_tracing',
         'as'	  =>'projecto.edit_tracing'
         ]);
 
-        Route::patch('/admin/projecto/editar_seguimiento/{id}',[
+        Route::patch('/admin/projecto/editar_seguimiento/{id}',[//falta desarrollar
         'uses'	=>'ProjectController@update_tracing',
         'as'	=>'projecto.update_tracing'
         ]);
 
-        Route::get('/admin/projecto/registrar_brief/{id}',[//brief
+        Route::get('/agent/projecto/registrar_brief/{id}',[//brief
         'uses'	=>'ProjectController@create_brief',
         'as'  	=>'projecto.add_brief'
         ]);
 
-        Route::post('/admin/projecto/registrar_brief/',[
+        Route::post('/agent/projecto/registrar_brief/',[
           'uses'=>'ProjectController@store_brief',
           'as'  =>'projecto.store_brief'
         ]);
 
-        Route::get('/admin/projecto/editar_brief/{id}',[
+        Route::get('/agent/projecto/editar_brief/{id}',[
         'uses'	=>'ProjectController@edit_brief',
         'as'	  =>'projecto.editar_brief'
         ]);
 
-        Route::patch('/admin/projecto/editar_brief/{id}',[
+        Route::patch('/agent/projecto/editar_brief/{id}',[
         'uses'	=>'ProjectController@update_brief',
         'as'	=>'projecto.update_brief'
         ]);
@@ -164,7 +139,46 @@ Route::group(['middleware'=>'auth'], function(){
 
 
     });
+    /**
+    //Segundo filtro. role-> agent
+     */
+    Route::group(['middleware'=>'role:agent'], function()//solo lo hace el agent y el admin.
+          {
 
+          Route::get('agent/projectos/crear',[ //proyectos..
+            'uses'	=>'ProjectController@create',
+            'as'  	=>'projectos.create'
+          ]);
+
+          Route::post('agent/projectos/crear',[
+            'uses'	=>'ProjectController@store',
+            'as'  	=>'projectos.store'
+          ]);
+          Route::get('agent/projecto/ingresos/{id}',[/// ingresoso
+          'uses'	=>'ProjectController@list_payments',
+          'as'  	=>'projecto.ingresos'
+          ]);
+
+          Route::get('agent/projecto/registrar_ingreso/{id}',[
+          'uses'	=>'ProjectController@create_payment',
+          'as'	  =>'projecto.add_ingresos'
+          ]);
+
+          Route::post('/agent/projecto/registrar_ingreso/',[
+            'uses'=>'ProjectController@store_payment',
+            'as'  =>'projecto.store_ingresos'
+          ]);
+
+          Route::get('/agent/projecto/editar_ingreso/{id}',[//falta desarrollar
+          'uses'	=>'ProjectController@edit_payment',
+          'as'  	=>'projecto.edit_ingresos'
+          ]);
+
+          Route::patch('/agent/projecto/editar_ingreso/{id}',[//falta desarrollar
+          'uses'	=>'ProjectController@update_payment',
+          'as'	=>'projecto.update_ingresos'
+          ]);
+      });
 
       /**
       //Segundo filtro. role-> admin

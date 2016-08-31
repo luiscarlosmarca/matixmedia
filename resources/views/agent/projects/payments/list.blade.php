@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('htmlheader_title')
-    Home
+    Lista de Ingresos
 @endsection
 
 @section('main-content')
@@ -24,7 +24,7 @@
                     <div class="panel-body">
 
                       <p>
-                    @include('projects/payments/partials/accion')
+                    @include('agent/projects/payments/partials/accion')
                       </p>
 
                         <div class="table-responsive">

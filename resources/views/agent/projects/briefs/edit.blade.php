@@ -23,7 +23,7 @@
 
 
 
-                  {!!Form::model($brief,['route'=>['admin.projecto.update_brief',$brief],'method'=>'PATCH','enctype'=>'multipart/form-data'])!!}
+                  {!!Form::model($brief,['route'=>['projecto.update_brief',$brief],'method'=>'PATCH','enctype'=>'multipart/form-data'])!!}
 
                       @include('projects.briefs.partials.fields')
 

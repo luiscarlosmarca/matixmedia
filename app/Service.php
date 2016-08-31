@@ -13,7 +13,7 @@ class Service extends Model
 
   //** relaciones
 
-  public function payments()
+  public function projects()
   {
     //Un servicio tiene muchos proyectos relacioneados
     return $this->hasMany('App\Project');

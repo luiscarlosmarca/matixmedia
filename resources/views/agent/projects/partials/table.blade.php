@@ -32,6 +32,10 @@
                                   <ul class="dropdown-menu">
                                     <li><a href="{{route('projecto.edit',$project)}}">Actualizar</a></li>
                                     <li><a href="{{route('projecto.add_tracing',$project)}}">Seguimientos</a></li>
+
+                                    @if(Auth::user()->agent())
+                                    <li><a href="{{route('projecto.ingresos',$project)}}">Ingresos</a></li>
+                                    @endif
                                     @if($project->brief=="")
                                     <li><a href="{{route('projecto.add_brief',$project)}}">Crear Brief</a></li>
                                     @else

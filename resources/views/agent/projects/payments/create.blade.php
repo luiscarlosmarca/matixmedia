@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('htmlheader_title')
-    Crear Usuario
+Registrar Ingreso
 @endsection
 
 
@@ -20,14 +20,14 @@
 			<div class="panel panel-primary">
 
 
-				<div class="panel-heading"><h3>Registrar ingreso al proyecto: {{$project->name}} </h3></div>
+				<div class="panel-heading"><h3>Registrando ingreso al proyecto: {{$project->name}} </h3></div>
 
 
     				<div class="panel-body">
-              {!!Form::open(['route'=>'admin.projecto.store_ingresos','method'=>'POST'])!!}
+              {!!Form::open(['route'=>'projecto.store_ingresos','method'=>'POST'])!!}
 
 
-                    @include('projects.payments.partials.fields')
+                    @include('agent.projects.payments.partials.fields')
 
                     <button type="submit" class="btn btn-primary">
                     Registrar ingreso

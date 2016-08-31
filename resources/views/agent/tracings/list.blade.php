@@ -18,13 +18,13 @@
       	<div class="panel panel-primary">
 
             <div class="panel-heading">
-                    <h3>Listado de seguimientos del agente {{$user->name}}</h3>
+                    <h3>Listado de seguimientos del  {{$user->role}} {{$user->name}}</h3>
 
               </div>
                     <div class="panel-body">
 
                       <p>
-                    @include('agent/tracings/partials/search')
+                    <!-- @include('agent/tracings/partials/search') -->
                       </p>
 
                         <div class="table-responsive">
