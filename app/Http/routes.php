@@ -10,6 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::post('send', ['as' => 'send', 'uses' => 'MailController@send'] );
+Route::get('contact', ['as' => 'contact', 'uses' => 'MailController@index'] );
+
 Route::get('/',[
   'uses'		=>	'Auth\AuthController@getLogin',
   'as'		=>	'login'
@@ -58,6 +61,22 @@ Route::group(['middleware'=>'auth'], function(){
      Route::group(['middleware'=>'role:customer'], function()
      {
 
+       Route::get('agent/projectos/',[//listado de los proyectos de los develper
+       'uses'	=>'ProjectController@index',
+       'as'	  =>'projectos.index'
+       ]);
+
+       Route::get('/agent/projecto/editar/{id}',[
+       'uses'	=>'ProjectController@edit',
+       'as'  	=>'projecto.edit'
+       ]);
+
+       Route::patch('/admin/projecto/editar/{id}',[
+       'uses'	=>'ProjectController@update',
+       'as'	=>'projecto.update'
+       ]);
+
+
      });
         /**
           //Segundo filtro. role-> developer, todo lo que haga el developer lo hace el agente
@@ -65,26 +84,13 @@ Route::group(['middleware'=>'auth'], function(){
     Route::group(['middleware'=>'role:developer'], function()
     {
 
-      Route::get('agent/projectos/',[//listado de los proyectos de los develper
-      'uses'	=>'ProjectController@index',
-      'as'	  =>'projectos.index'
-      ]);
-
       Route::get('agent/projecto/seguimientos/',[/// seguimientos
       'uses'	=>'TracingController@my_tracings',
       'as'  	=>'seguimientos.index'
-      
+
       ]);
 
-        Route::get('/agent/projecto/editar/{id}',[
-        'uses'	=>'ProjectController@edit',
-        'as'  	=>'projecto.edit'
-        ]);
 
-        Route::patch('/admin/projecto/editar/{id}',[
-        'uses'	=>'ProjectController@update',
-        'as'	=>'projecto.update'
-        ]);
 
 
         Route::get('/agent/projecto/registrar_seguimiento/{id}',[

@@ -42,9 +42,9 @@ class TracingController extends Controller
       $user=User::findOrFail($id);
       $role=Auth::user()->role;
 
-      if ($role=='developer'|| $role=='agent')
+      if ($role=='developer'|| $role=='agent' || $role=='customer')
       {
-        return view('agent/tracings/list', compact('user'));
+        return view('agent/tracings/list',compact('user'));
 
       }elseif ($role=='admin')
        {

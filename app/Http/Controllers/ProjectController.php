@@ -52,7 +52,11 @@ class ProjectController extends Controller
 
        }elseif ($role=='customer')
        {
-         $projects=Project::where('agent_id', '$id')->filter($request->get('name'));
+
+
+         $projects=Project::where('costumer_id', $id)->get();
+         return view('agent/projects/list', compact('projects'));
+
        }
        elseif ($role=='admin')
        {
@@ -67,7 +71,7 @@ class ProjectController extends Controller
     {
       /// Para generar pdf de cada projecto, por separado.
        $project=Project::findOrFail($id);
-       $pdf = PDF::loadView('projects/mi_pdf',compact('project'));
+        $pdf = PDF::loadView('projects/mi_pdf',compact('project'));
        return $pdf->stream();
     }
 
@@ -211,17 +215,18 @@ class ProjectController extends Controller
     {
         $developers=User::orderBy('name','ASC')->where('role', 'developer')->lists('name','id');
         $services=Service::orderBy('name','ASC')->lists('name','id');
+        $costumers=User::orderBy('name','ASC')->where('role', 'customer')->lists('name','id');
         $project=Project::findOrFail($id);
 
         $role=Auth::user()->role;
-        if ($role=='developer'|| $role=='agent')
+        if ($role=='developer'|| $role=='agent' || $role=='customer')
         {
 
           return view('agent/projects/edit',compact('project','developers','services'));
 
         }elseif ($role=='admin')
          {
-           return view('projects/edit',compact('project','developers','services'));
+           return view('projects/edit',compact('project','developers','services','costumers'));
          }
 
 
@@ -267,7 +272,7 @@ class ProjectController extends Controller
       Session::flash('message',$projects->name.' Se actualizo');
       $role=Auth::user()->role;
 
-      if ($role=='developer'|| $role=='agent')
+      if ($role=='developer'|| $role=='agent'|| $role=='customer')
       {
         return redirect()->route('projectos.index');
 

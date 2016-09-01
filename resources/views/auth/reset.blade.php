@@ -30,7 +30,7 @@
         @endif
 
         <div class="login-box-body">
-            <p class="login-box-msg">Reset Password</p>
+            <p class="login-box-msg">Recordar Contraseña</p>
             <form action="{{ url('/password/reset') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="token" value="{{ $token }}">
@@ -60,8 +60,7 @@
                 </div>
             </form>
 
-            <a href="{{ url('/auth/login') }}">Log in</a><br>
-            <a href="{{ url('/auth/register') }}" class="text-center">Register a new membership</a>
+            <a href="{{ url('/') }}">Iniciar sesión</a><br>
 
         </div><!-- /.login-box-body -->
 

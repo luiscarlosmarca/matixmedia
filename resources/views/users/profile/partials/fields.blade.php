@@ -45,7 +45,7 @@
 							{!! Form::file('curriculum',null,['class'=>'form-control','placeholder'=>'ad de residencia'])!!}
 			@endif
 						{!! Form::label('feNa','Fecha de nacimiento')!!}
-						{!! Form::text('feNa',Auth::user()->profile->feNa,['class'=>'form-control','placeholder'=>'escriba la fecha de nacimiento.'])!!}
+						{!! Form::date('feNa',Auth::user()->profile->feNa,['class'=>'form-control','placeholder'=>'escriba la fecha de nacimiento.'])!!}
 			@endif
 
 			@if(Auth::user()->admin())

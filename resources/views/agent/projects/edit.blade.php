@@ -74,7 +74,7 @@
                     </div>
                       {!!Form::model($project,['route'=>['projecto.update',$project],'method'=>'PATCH','enctype'=>'multipart/form-data'])!!}
 
-                      @include('projects.partials.fieldsEdit')
+                      @include('agent.projects.partials.fieldsEdit')
 
                     <button type="submit" class="btn btn-primary">
                       Actualizar Projecto

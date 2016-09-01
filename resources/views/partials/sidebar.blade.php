@@ -80,7 +80,7 @@
                   <li class="treeview">
                       <a href="{{route('projectos.index')}}">
                         <i class='fa fa-fire'></i> <span>Mis Proyectos</span> <i class="fa fa-angle-left pull-right"></i></a>
-                        
+
                   </li>
                 @endif
               @if(Auth::user()->admin())
@@ -98,7 +98,7 @@
               </li>
               @endif
 
-              @if(Auth::user()->developer()|| Auth::user()->customer()||Auth::user()->agent())
+              @if(Auth::user()->developer()||Auth::user()->agent())
               <li class="treeview">
                 <a href="{{route('seguimientos.index')}}">
                 <i class='fa fa-wrench'></i> <span>Mis Segumientos</span> <i class="fa fa-angle-left pull-right"></i></a>

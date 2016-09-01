@@ -29,7 +29,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
       //only admin
- 
+
       $users= User::filter($request->get('name'),$request->get('role'),$request->get('cedula'));
 
       return view('users/list', compact('users'));
@@ -80,6 +80,23 @@ class UserController extends Controller
            $profiles->save();
 
            Session::flash('message','El usuario '.$users->name.'  Fue creado exitosamente');
+
+           //guarda el valor de los campos enviados desde el form en un array
+          $data = $request->all();
+
+          //se envia el array y la vista lo recibe en llaves individuales {{ $email }} , {{ $subject }}...
+          \Mail::send('emails.message-new-user', $data, function($message) use ($request)
+          {
+              //remitente
+              $message->from($request->email, $request->name);
+
+              //asunto
+              $message->subject($request->name);
+
+              //receptor
+              $message->to(env('CONTACT_MAIL'), env('CONTACT_NAME'));
+
+          });
            return redirect()->route('admin.usuarios.index');
 
 

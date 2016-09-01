@@ -18,7 +18,7 @@
 				<div class="panel-heading">Inicio</div>
 
 				<div class="panel-body">
-					Bienvenidos
+				App web Matix.
 				</div>
 			</div>
 		</div>

@@ -3,7 +3,7 @@
 					{!! Form::label('name','Nombre')!!}
 					{!! Form::text('name',null,['class'=>'form-control','placeholder'=>'Escriba el nombre del projecto'])!!}
 
-					{!! Form::label('cellphone','Precio')!!}
+					{!! Form::label('precio','Precio')!!}
 					{!! Form::text('price',null,['class'=>'form-control','placeholder'=>'Escriba el precio total del prouyecto, especifique detalles en notas.'])!!}
 
 					{!! Form::label('formPay','Forma de pago')!!}
@@ -18,6 +18,9 @@
 					{!!Form::label('developer', 'Desarrollador') !!}
 					{!!Form::select('developer_id',$developers, null, ['class'=>'form-control','placeholder'=>'Selecciones una opcion','required']) !!}
 
+
+					{!!Form::label('costumers', 'Cliente') !!}
+					{!!Form::select('costumer_id',$costumers, null, ['class'=>'form-control','placeholder'=>'Selecciones una opcion','required']) !!}
 
 					{!! Form::label('dateStart','Fecha de inicio')!!}
 					{!! Form::date('dateStart',null,['class'=>'form-control','placeholder'=>'Escriba  la fecha de inicio'])!!}
