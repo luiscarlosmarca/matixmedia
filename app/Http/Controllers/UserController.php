@@ -85,7 +85,7 @@ class UserController extends Controller
           $data = $request->all();
 
           //se envia el array y la vista lo recibe en llaves individuales {{ $email }} , {{ $subject }}...
-          \Mail::send('emails.message-new-user', $data, function($message) use ($request)
+          \Mail::send('emails.message', $data, function($message) use ($request)
           {
               //remitente
               $message->from($request->email, $request->name);

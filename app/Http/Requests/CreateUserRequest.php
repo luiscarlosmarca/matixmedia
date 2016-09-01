@@ -27,7 +27,7 @@ class CreateUserRequest extends Request
           'name'      => 'required|max:255',
           'email'     => 'required|email|max:255|unique:users',
           'password'  => 'required|confirmed|min:6',
-          'role'      => 'required|string|in:developer,agent,costumer',
+          'role'      => 'required|string|in:developer,agent,customer',
           'photo'     => 'required|image',
           'cedula'    => 'required|unique:users'
         ];

@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Profile;
 use Illuminate\Support\Facades\Session;
@@ -19,6 +19,11 @@ class Profile extends Model
       return $this->belongsTo('App\User');
     }
 //** metodos
+    public function getAgeAttribute()
+    {
+
+      return Carbon::parse($this->feNa)->age;
+    }
 
     public function scopeReference($query,$reference)// Buscar por la referencia de los clientes
     {

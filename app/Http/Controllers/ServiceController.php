@@ -11,6 +11,7 @@ use App\Http\Requests\CreateServiceRequest;
 use App\Http\Requests\EditServiceRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ServiceController extends Controller
 {
@@ -22,7 +23,7 @@ class ServiceController extends Controller
      public function index(Request $request)
      { //view for admin, agent and developer
        $services= Service::filter($request->get('name'));
-      
+
        return view('services/list', compact('services'));
      }
 

@@ -55,11 +55,12 @@
                       <a href="#"><i class='fa fa-fire'></i> <span>Projectos</span> <i class="fa fa-angle-left pull-right"></i></a>
                       <ul class="treeview-menu">
 
+                          <li><a href="{{route('admin.projectos.create')}}">Crear un nuevo proyecto</a></li>
 
                           <li><a href="{{route('admin.projectos.index')}}">Listado</a></li>
                           <li><a href="{{route('admin.projectos.pdf')}}"target="_blank">Generar informes</a></li>
 
-                          <li><a href="{{route('admin.projectos.create')}}">Crear un nuevo proyecto</a></li>
+
                       </ul>
                   </li>
                 @endif
@@ -90,7 +91,7 @@
                   <ul class="treeview-menu">
 
                         <li><a href="{{route('admin.seguimientos.index')}}">Listado</a></li>
-                        <li><a href="{{route('admin.seguimientos.pdf')}}"target="_blank">Generar informes</a></li>
+                        <!-- <li><a href="{{route('admin.seguimientos.pdf')}}"target="_blank">Generar informes</a></li> -->
 
 
 
@@ -133,7 +134,7 @@
                   <ul class="treeview-menu">
 
                       <li><a href="{{route('admin.ingresos.index')}}">Listado</a></li>
-                      <li><a href="{{route('admin.ingresos.pdf')}}"target="_blank">Generar informes</a></li>
+                      <!-- <li><a href="{{route('admin.ingresos.pdf')}}"target="_blank">Generar informes</a></li> -->
 
                   </ul>
               </li>
@@ -154,7 +155,7 @@
                   <ul class="treeview-menu">
 
                       <li><a href="{{route('admin.salidas.index')}}">Listado</a></li>
-                      <li><a href="{{route('admin.salidas.pdf')}}"target="_blank">Generar informes</a></li>
+                      <!-- <li><a href="{{route('admin.salidas.pdf')}}"target="_blank">Generar informes</a></li> -->
 
                   </ul>
               </li>
@@ -175,13 +176,13 @@
               </li>
               @endif
   <!-- /      .Servicios -->
-              @if(Auth::user()->developer()||Auth::user()->agent()||Auth::user()->admin())
+              @if(Auth::user()->developer()||Auth::user()->agent()))
               <li class="treeview">
                   <a href="#"><i class='fa fa-th-large'></i> <span>Servicios</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
 
                     <li><a href="{{route('servicios.index')}}">Listado</a></li>
-                    <li><a href="{{route('servicios.pdf')}}">Generar Portafolio</a></li>
+                    <li><a href="{{route('servicios.pdf')}}" target="_blank">Generar Portafolio</a></li>
 
                   </ul>
               </li>
@@ -196,7 +197,7 @@
 
 
                           <li><a href="{{route('admin.servicios.index')}}">Listado</a></li>
-                          <li><a href="{{route('admin.servicios.index')}}">Generar Portafolio</a></li>
+                          <li><a href="{{route('admin.servicios.pdf')}}" target="_blank">Generar Portafolio</a></li>
 
                     </ul>
                 </li>

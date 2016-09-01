@@ -32,9 +32,9 @@
 		          {!! Form::text('email_company',null,['class'=>'form-control','placeholder'=>'escriba el email de su empresa'])!!}
 
 							{!! Form::label('direccion_company','Dirección de la Empresa')!!}
-							{!! Form::text('direccion',null,['class'=>'form-control','placeholder'=>'escriba el dirección de su empresa'])!!}
+							{!! Form::text('address_company',null,['class'=>'form-control','placeholder'=>'escriba el dirección de su empresa'])!!}
 		@endif
-		@if(Auth::user()->developer()|| Auth::user()->admin()||Auth::user()->agent())
+		@if(Auth::user()->developer()|| Auth::user()->admin()||Auth::user()->agent()Auth::user()->customer())
 							{!! Form::label('city','Ciudad')!!}
 							{!! Form::text('city',Auth::user()->profile->city,['class'=>'form-control','placeholder'=>'escriba la ciudad de residencia'])!!}
 
