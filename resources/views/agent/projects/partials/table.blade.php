@@ -3,11 +3,13 @@
                       <tr>
                           <th>Nombre</th>
                           <th>Servicio</th>
+                          @if(Auth::user()->agent()||Auth::user()->developer())
                           <th>Cliente</th>
-                          @if(Auth::user()->agent())
+                              @endif
+                          @if(Auth::user()->agent()||Auth::user()->customer())
                           <th>Developer</th>
                           @endif
-                          @if(Auth::user()->developer())
+                          @if(Auth::user()->developer()||Auth::user()->customer())
                           <th>Agent</th>
                           @endif
                           <th>Fecha de inicio</th>
@@ -21,11 +23,13 @@
 
                         <td>{{$project->name}}</td>
                         <td>{{$project->service->name}}</td>
+                        @if(Auth::user()->agent()||Auth::user()->developer())
                         <td>{{$project->costumer->name}}</td>
-                        @if(Auth::user()->agent())
+                        @endif
+                        @if(Auth::user()->agent()||Auth::user()->customer())
                         <td>{{$project->developer->name}}</td>
                         @endif
-                        @if(Auth::user()->developer())
+                        @if(Auth::user()->developer()||Auth::user()->customer())
                         <td>{{$project->agent->name}}</td>
                         @endif
 

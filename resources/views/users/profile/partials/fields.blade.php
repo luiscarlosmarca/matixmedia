@@ -20,7 +20,7 @@
               <input type="password" class="form-control" placeholder="Repita la contraseña" name="password_confirmation"/>
               <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
           </div>
-				@if(Auth::user()->customer()|| Auth::user()->admin())
+@if(Auth::user()->role=="admin"||Auth::user()->role=="customer")
 
 							{!! Form::label('name_company','Nombre de la Empresa')!!}
 							{!! Form::text('name_company',null,['class'=>'form-control','placeholder'=>'escriba el nombre de su empresa'])!!}
@@ -33,22 +33,26 @@
 
 							{!! Form::label('direccion_company','Dirección de la Empresa')!!}
 							{!! Form::text('address_company',null,['class'=>'form-control','placeholder'=>'escriba el dirección de su empresa'])!!}
-		@endif
-		@if(Auth::user()->developer()|| Auth::user()->admin()||Auth::user()->agent()Auth::user()->customer())
+@endif
 							{!! Form::label('city','Ciudad')!!}
 							{!! Form::text('city',Auth::user()->profile->city,['class'=>'form-control','placeholder'=>'escriba la ciudad de residencia'])!!}
 
 							{!! Form::label('social','social')!!}
 							{!! Form::text('social',Auth::user()->profile->social,['class'=>'form-control','placeholder'=>'escriba su red social'])!!}
-			@if(Auth::user()->profile->curriculum =="")
+@if(Auth::user()->role=="admin"||Auth::user()->role=="developer"||Auth::user()->role=="agent")
+@if(Auth::user()->curriculum=="")
+
 							{!! Form::label('curriculum','Curriculum')!!}
 							{!! Form::file('curriculum',null,['class'=>'form-control','placeholder'=>'ad de residencia'])!!}
-			@endif
+
+@endif
+@endif
 						{!! Form::label('feNa','Fecha de nacimiento')!!}
 						{!! Form::date('feNa',Auth::user()->profile->feNa,['class'=>'form-control','placeholder'=>'escriba la fecha de nacimiento.'])!!}
-			@endif
 
-			@if(Auth::user()->admin())
+
+@if(Auth::user()->role=="admin")
+
 
 									{!!Form::label('reference', 'Referencia') !!}
 									{!!Form::select('reference',config('reference.reference'), null, ['class'=>'form-control']) !!}
@@ -67,6 +71,6 @@
 									{!! Form::label('note','Nota')!!}
 									{!! Form::textarea('note',null,['class'=>'form-control textarea-content','placeholder'=>'escriba la nota'])!!}
 
-					@endif
+@endif
 
 				</div>

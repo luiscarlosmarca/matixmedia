@@ -47,6 +47,7 @@ class ServiceController extends Controller
        $id=Auth::user()->id;
        $services = new Service($request->all());
        $services->iduser_create=$id;
+       $services->iduser_update=$id;
        $services->save();
 
        Session::flash('message','El servicio: '.$services->name.' se creo exitosamente');

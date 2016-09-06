@@ -28,10 +28,10 @@ class CreateProfilesTable extends Migration
             $table->date('feNa');
             $table->text('note');
             //relaciones con la tabla usuario
-            $table->integer('user_id',10)->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')
             ->on('users')
-
+	    ->onDelete('cascade')
             ->onUpdate('cascade');
 
             $table->timestamps();

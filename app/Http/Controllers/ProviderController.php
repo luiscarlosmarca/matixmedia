@@ -43,7 +43,8 @@ class ProviderController extends Controller
     {
       $id=Auth::user()->id;
       $providers = new Provider($request->all());
-      $providers->iduser_create=$id;
+      $providers->user_id=$id;
+      $providers->iduser_update=$id;
       $providers->save();
       Session::flash('message','El proveedor: '.$providers->name.' se creo exitosamente');
       //
@@ -70,7 +71,7 @@ class ProviderController extends Controller
     {
       $id_user=Auth::user()->id;
       $providers=Provider::findOrFail($id);
-      $providers->iduser_update->$id_user;
+      $providers->iduser_update=$id_user;
       $providers->fill($request->all());
       $providers->save();
 
@@ -94,6 +95,7 @@ class ProviderController extends Controller
         $id=Auth::user()->id;
         $expenses = new Expense($request->all());
         $expenses->user_id=$id;
+        $expenses->iduser_update=$id;
         $expenses->save();
 
         // if($action=='save_new')

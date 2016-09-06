@@ -30,13 +30,13 @@
 					{!! Form::label('dateFinish','Fecha de entrega')!!}
 					{!! Form::date('dateFinish',null,['class'=>'form-control','placeholder'=>'Escriba  la fecha de entrega aproximada'])!!}
 
-  				{!! Form::label('file','Archivos del projecto')!!}
+  				<!-- {!! Form::label('file','Archivos del projecto')!!}
 					{!! Form::file('file',null,['class'=>'form-control'])!!}
 					<p class="help-block">Maximo 500Mb .rar y .zip.</p>
 
 					{!! Form::label('contract','Contracto del projecto')!!}
 					{!! Form::file('contract',null,['class'=>'form-control'])!!}
-						<p class="help-block">Documento firmado en formatos .pdf y .doc.</p>
+						<p class="help-block">Documento firmado en formatos .pdf y .doc.</p> -->
 
           {!! Form::label('note','Nota')!!}
           {!! Form::textarea('note',null,['class'=>'form-control textarea-content','placeholder'=>'Nota'])!!}

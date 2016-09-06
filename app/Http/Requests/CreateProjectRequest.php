@@ -37,8 +37,8 @@ class CreateProjectRequest extends Request
           'dateFinish'   => 'date|date_format:Y-m-d|after:dateStart',
           'developer_id' => 'required|exists:users,id',
          'costumer_id'   => 'required|exists:users,id',
-         'file'          =>'required|mimes:zip,rar',
-         'contract'      =>'mimes:pdf,doc'
+         'file'          => 'mimes:zip,rar',
+         'contract'      => 'mimes:pdf,doc'
         ];
     }
 }

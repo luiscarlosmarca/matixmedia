@@ -146,27 +146,27 @@ class ProjectController extends Controller
     {
          $id=Auth::user()->id;
 
-         if($request->file('contract'))
-         {
-             $contract = $request->file('contract');
-             $name_contract = 'Appmm_'.time().'.'.$contract->getClientOriginalExtension();
-             $path = public_path().'/upload/projects/contracts/';
-             $contract->move($path,$name_contract);
-         }
-         if($request->file('file'))
-         {
-             $file = $request->file('file');
-             $name_file = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
-             $path = public_path().'/upload/projects/files/';
-             $file->move($path,$name_file);
-         }
+        //  if($request->file('contract'))
+        //  {
+        //      $contract = $request->file('contract');
+        //      $name_contract = 'Appmm_'.time().'.'.$contract->getClientOriginalExtension();
+        //      $path = public_path().'/upload/projects/contracts/';
+        //      $contract->move($path,$name_contract);
+        //  }
+        //  if($request->file('file'))
+        //  {
+        //      $file = $request->file('file');
+        //      $name_file = 'Appmm_'.time().'.'.$file->getClientOriginalExtension();
+        //      $path = public_path().'/upload/projects/files/';
+        //      $file->move($path,$name_file);
+        //  }
 
          $projects = new Project($request->all());
          $projects->agent_id=$id;
          $projects->iduser_update=$id;
-         $projects->file=$name_file;
-         $projects->contract=$name_contract;
-         $projects->save();
+        //  $projects->file=$name_file;
+        //  $projects->contract=$name_contract;
+          $projects->save();
 
         Session::flash('message',$projects->name.'  Fue creado exitosamente');
 

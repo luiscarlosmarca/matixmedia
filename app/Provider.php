@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 class Provider extends Model
 {
   protected $table = 'providers';
-  protected $fillable = ['phone','name','email','contact','category','iduser_create','iduser_update','note'];
+  protected $fillable = ['phone','name','email','contact','category','user_id','iduser_update','note'];
 
   //** relaciones
 

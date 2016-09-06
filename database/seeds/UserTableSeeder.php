@@ -21,7 +21,7 @@ class UserTableSeeder extends Seeder
             'email' =>'app@matixmedia.com.co',
 
             'role'  =>'admin',
-            'password'=>bcrypt('secret')
+            'password'=>('secret')
 
             ]);
 

@@ -17,8 +17,8 @@
                     <tr>
                         <td>{{$service->name}}</td>
                         <td>{{$service->price}}</td>
-                        <td>{{$service->details}}</td>
-                        <td>{{$service->note}}</td>
+                        <td>{!!$service->details!!}</td>
+                        <td>{!!$service->note!!}</td>
 
                         @if(Auth::user()->admin())
                         <td>
@@ -33,7 +33,7 @@
                             <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>  Ver detalles
                           </a>
                         </td>
-                    
+
 
 
                     </tr>

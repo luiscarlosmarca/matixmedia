@@ -6,9 +6,9 @@
 
                           <th>Telefono</th>
                           <th>Email</th>
-
-                          <th>Contacto</th>
                           <th>Categoria</th>
+                          <th>Contacto</th>
+
                           <th>Acciones</th>
 
                       </tr>
@@ -48,4 +48,4 @@
 
 
 {!!$providers->render()!!}
-        </div>
+      
